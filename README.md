@@ -1,2 +1,2 @@
 # ecommerce-frontal-sneakers
-Realização do Projeto Integrado do terceiro semestre da faculdade
+Realização do Projeto Integrador do terceiro semestre da faculdade
