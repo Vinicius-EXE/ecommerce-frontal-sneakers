@@ -1,0 +1,14 @@
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+}
+
+.header-content {
+    background-color: rgba(217, 217, 217, 0.25);
+
+    width: 1750px;
+    height: 100px;
+}
