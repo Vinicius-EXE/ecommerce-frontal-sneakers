@@ -7,8 +7,65 @@ header {
 }
 
 .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: rgba(217, 217, 217, 0.25);
 
+    padding: 0 15px 0 15px;
     width: 1750px;
     height: 100px;
+}
+
+.search-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 650px;
+    height: 50px;
+    width: 750px;
+}
+
+.search-bar-container input {
+    color: #FFF;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    outline: none;
+    background-color: transparent;
+
+    border: 2.5px solid #131313;
+    border-radius: 25px 0 0 25px;
+    padding-left: 15px;
+    width: 90%;
+    height: 100%;
+}
+
+.search-bar-container input::placeholder {
+    color: #FFF;
+}
+
+.search-bar-container button {
+    border: none;
+    border-radius: 0 25px 25px 0;
+}
+
+.logo-container img{
+    height: 85px;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #131313;
+
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.icon-container i {
+    color: #FFF;
+    font-size: 20px;
 }
