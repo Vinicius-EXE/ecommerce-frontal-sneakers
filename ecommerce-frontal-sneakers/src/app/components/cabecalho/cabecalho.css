@@ -2,6 +2,10 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    top: 0;
+
+    background-color: rgba(217, 217, 217, 0.25);;
 
     width: 100%;
 }
@@ -10,7 +14,6 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgba(217, 217, 217, 0.25);
 
     padding: 0 15px 0 15px;
     width: 1750px;
