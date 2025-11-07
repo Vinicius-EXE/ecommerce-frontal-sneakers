@@ -48,8 +48,28 @@ header {
 }
 
 .search-bar-container button {
-    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #131313;
+    color: #FFF;
+    font-size: 20px;
+
+    border: 2.5px solid #131313;
     border-radius: 0 25px 25px 0;
+    height: 50px;
+    width: 50px;
+
+    cursor: pointer;
+}
+
+.search-bar-container button:hover {
+    background-color: #FFF;
+    color: #131313;
+    font-size: 20px;
+    border: 2.5px solid #131313;
+    transition: 0.3s;
 }
 
 .logo-container img{
@@ -68,7 +88,31 @@ header {
     width: 50px;
 }
 
-.icon-container i {
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #131313;
     color: #FFF;
     font-size: 20px;
+
+    border: 1px solid #131313;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+
+    cursor: pointer;
+}
+
+.icon-container:hover {
+    background-color: #FFF;
+    color: #131313;
+    font-size: 20px;
+
+    border: 2.5px solid #131313;
+    
+    scale: 1.1;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+    transition: 0.3s;
 }
