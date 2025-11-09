@@ -44,7 +44,7 @@ header {
 }
 
 .search-bar-container input::placeholder {
-    color: #FFF;
+    color: #CCC;
 }
 
 .search-bar-container button {

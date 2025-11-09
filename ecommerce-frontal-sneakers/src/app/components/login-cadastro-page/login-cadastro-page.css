@@ -1,0 +1,22 @@
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #FDF4F2;
+}   
+
+.form-container, .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    height: 100vh;
+    width: 50%;
+}
+
+.image-container img {
+    height: 115%;
+}
