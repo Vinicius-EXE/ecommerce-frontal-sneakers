@@ -1,10 +1,10 @@
-package com.ecommerce.frontalsneakers;
+package com.frontalsneakers.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FrontalsneakersApplicationTests {
+class FrontalSneakersBackendApplicationTests {
 
 	@Test
 	void contextLoads() {
