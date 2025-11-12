@@ -1,0 +1,51 @@
+.rectangle-parent {
+  	width: 100%;
+  	height: 445px;
+  	position: relative;
+  	text-align: center;
+  	font-size: 40px;
+  	color: #000;
+  	font-family: Inter;
+}
+.group-child {
+  	position: absolute;
+  	top: 0px;
+  	left: 0px;
+  	border-radius: 20px;
+  	background-color: #b7b7b7;
+  	width: 350px;
+  	height: 320px;
+}
+.tenis {
+  	position: absolute;
+  	top: 340.44px;
+  	left: 0px;
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+  	width: 140px;
+  	height: 51px;
+}
+.group-inner {
+  	position: absolute;
+  	top: 411.85px;
+  	left: 0px;
+  	border-radius: 30px;
+  	background-color: #d9d9d9;
+  	border: 1px solid #000;
+  	box-sizing: border-box;
+  	width: 140px;
+  	height: 33.2px;
+}
+.rectangle-div {
+  	position: absolute;
+  	top: 410.57px;
+  	left: 210px;
+  	border-radius: 30px;
+  	background-color: #d9d9d9;
+  	border: 1px solid #000;
+  	box-sizing: border-box;
+  	width: 140px;
+  	height: 33.2px;
+}
+
