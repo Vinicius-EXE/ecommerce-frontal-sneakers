@@ -1,99 +1,53 @@
 .rodape {
-  	width: 100%;
-  	height: 224px;
-  	position: relative;
-  	text-align: center;
-  	font-size: 24px;
-  	color: #fff;
-  	font-family: Inter;
-}
-.rodape-child {
-  	position: absolute;
-  	top: 0px;
-  	left: 0px;
-  	background-color: #3e3d42;
-  	width: 1920px;
-  	height: 224px;
-}
-.criado-por {
-  	position: absolute;
-  	top: 25px;
-  	left: 1680px;
-  	display: flex;
-  	align-items: center;
-  	justify-content: center;
-  	width: 174.7px;
-}
-.vinicius-alves {
-  	position: absolute;
-  	top: 130px;
-  	left: 1684px;
-}
-.arthur-pereira {
-  	position: absolute;
-  	top: 77px;
-  	left: 1684px;
-}
-.rodape-item {
-  	position: absolute;
-  	top: 179px;
-  	left: 0px;
-  	background-color: #343434;
-  	width: 1920px;
-  	height: 45px;
-}
-.clip-path-group {
-  	position: absolute;
-  	height: 84.38%;
-  	width: 11.25%;
-  	top: 5.8%;
-  	right: 84.06%;
-  	bottom: 9.82%;
-  	left: 4.69%;
-}
-.group {
-  	position: absolute;
-  	height: 137.99%;
-  	width: 100%;
-  	top: -25.58%;
-  	right: 0%;
-  	bottom: -12.41%;
-  	left: 0%;
-}
-.mask-group {
-  	position: absolute;
-  	height: 100%;
-  	width: 100%;
-  	top: 0%;
-  	right: 0%;
-  	bottom: 0%;
-  	left: 0%;
-}
-.rectangle-icon {
-  	position: absolute;
-  	height: 100%;
-  	width: 100%;
-  	top: 0%;
-  	right: 0%;
-  	bottom: 0%;
-  	left: 0%;
-  	max-width: 100%;
-  	overflow: hidden;
-  	max-height: 100%;
-  	object-fit: cover;
+  width: 100%;
+  background-color: #3e3d42;
+  color: #fff;
+  font-family: Inter, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.text {
-  	position: absolute;
-  	height: 35.71%;
-  	width: 52.08%;
-  	top: 32.14%;
-  	right: 22.92%;
-  	bottom: 32.14%;
-  	left: 25%;
-  	font-size: 18px;
-  	font-family: Inter;
-  	font-weight: 500;
-  	color: #ffffff;
-  	text-align: left;
+.rodape-conteudo{
+	display: flex;
+	justify-content: space-between;
+	background-color: #3e3d42;
+	align-items: center;
+	width: 100%;
+	padding: 2rem;
+	flex-wrap: wrap;
+	text-align: center;
+}
+.rodape-logo img{
+	width: 150px;
+	height: auto;
+}
+
+.rodape-textos {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.3rem;
+}
+
+.criado-por{
+	font-weight: 600;
+	font-size: 18px;
+}
+
+.nomes {
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.rodape-barra {
+	width: 100%;
+	background-color: #343434;
+	text-align: center;
+	padding: 1rem 0;
+}
+
+.rodape-direitos{
+	font-size: 14px;
+	margin: 0;
 }
