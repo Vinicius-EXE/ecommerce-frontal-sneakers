@@ -4,6 +4,8 @@
     align-items: center;
     justify-content: space-evenly;
 
+    font-family: "Inria Sans", sans-serif;
+
     border-radius: 24px;
     border: 1px solid #000;
     height: 850px;
@@ -22,3 +24,112 @@
     position: relative;
     overflow: hidden;
 }
+
+.cadastro-container h1 {
+    font-size: 40px;
+    font-weight: 900;
+    margin-bottom: 25px;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadastro-container p {
+    text-align: center;
+    font-size: 32px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+form input {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #555;
+    font-weight: 700;
+
+    margin-top: 35px;
+    padding-left: 15px;
+    border: 1px solid #000;
+    border-radius: 20px;
+    height: 55px;
+    width: 500px;
+
+    outline: none;
+}
+
+form input::placeholder {
+    color: #555;
+    font-weight: 700;
+}
+
+.password-container {
+    display: flex;
+}
+
+.password-container input{
+    border-radius: 20px 0 0 20px;
+    border-right: none;
+    width: 445px;
+}
+
+.password-container button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #555;
+
+    border: 1px solid #000;
+    border-left: none;
+    border-radius: 0 20px 20px 0;
+    margin-top: 35px;
+    height: 55px;
+    width: 55px;
+
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.cadastrar-action-btn {
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFF;
+    
+    background-color: #34A853;
+
+    border: 2.5px solid #092C12;
+    border-radius: 20px;
+    margin: 55px 0 5px 0;
+    height: 55px;
+    width: 200px;
+
+    cursor: pointer;
+}
+
+.cadastrar-action-btn:hover {
+    background-color: #FFF;
+    color: #34A853;
+
+    transition: 0.3s;
+}
+
+.go-to-login-btn {
+    color: #777;
+}
+
+.go-to-login-btn:hover {
+    color: #333;
+}
+

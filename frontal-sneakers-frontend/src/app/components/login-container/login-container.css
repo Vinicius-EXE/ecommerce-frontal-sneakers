@@ -134,10 +134,10 @@ form input::placeholder {
     transition: 0.3s;
 }
 
-.go-to-cadastro {
+.go-to-cadastro-btn {
     color: #777;
 }
 
-.go-to-cadastro:hover {
+.go-to-cadastro-btn:hover {
     color: #333;
 }
