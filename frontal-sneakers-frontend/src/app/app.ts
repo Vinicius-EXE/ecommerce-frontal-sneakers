@@ -9,11 +9,10 @@ import { LoginCadastroPage } from './components/login-cadastro-page/login-cadast
 import { LoginContainer } from './components/login-container/login-container';
 import { CadastroContainer } from './components/cadastro-container/cadastro-container';
 import { CardPromocao } from "./components/card-promocao/card-promocao";
-import { CardMarca } from "./components/card-marca/card-marca";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Cabecalho, BannerHome, CardCategoria, CardProduto, Rodape, LoginCadastroPage, LoginContainer, CadastroContainer, CardPromocao, CardMarca],
+  imports: [RouterOutlet, Cabecalho, BannerHome, CardCategoria, CardProduto, Rodape, LoginCadastroPage, LoginContainer, CadastroContainer, CardPromocao,],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

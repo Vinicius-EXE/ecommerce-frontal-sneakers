@@ -1,51 +1,109 @@
-.rectangle-parent {
-  	width: 100%;
-  	height: 445px;
-  	position: relative;
-  	text-align: center;
-  	font-size: 40px;
-  	color: #000;
-  	font-family: Inter;
-}
-.group-child {
-  	position: absolute;
-  	top: 0px;
-  	left: 0px;
-  	border-radius: 20px;
-  	background-color: #b7b7b7;
-  	width: 350px;
-  	height: 320px;
-}
-.tenis {
-  	position: absolute;
-  	top: 340.44px;
-  	left: 0px;
-  	display: flex;
-  	align-items: center;
-  	justify-content: center;
-  	width: 140px;
-  	height: 51px;
-}
-.group-inner {
-  	position: absolute;
-  	top: 411.85px;
-  	left: 0px;
-  	border-radius: 30px;
-  	background-color: #d9d9d9;
-  	border: 1px solid #000;
-  	box-sizing: border-box;
-  	width: 140px;
-  	height: 33.2px;
-}
-.rectangle-div {
-  	position: absolute;
-  	top: 410.57px;
-  	left: 210px;
-  	border-radius: 30px;
-  	background-color: #d9d9d9;
-  	border: 1px solid #000;
-  	box-sizing: border-box;
-  	width: 140px;
-  	height: 33.2px;
+.card-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+
+	font-family: "Inria Sans", sans-serif;
+
+	padding: 10px;
+	border: 1px solid #000;
+	border-radius: 20px;
+	height: 450px;
+	width: 350px;
+
+	background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 0px 0px rgba(255, 255, 255, 0);
 }
 
+.produto-image {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	border: 1px solid #CCC;
+	border-radius: 10px;
+	width: 100%;
+	height: 300px;
+
+	overflow: hidden;
+}
+
+.produto-image img {
+	width: 100%;
+}
+
+.text-content {
+	position: relative;
+	height: 60px;
+	width: 95%;
+}
+
+.text-content span {
+	position: absolute;
+}
+
+.marca-produto {
+	color: #AAA;
+	font-size: 30px;
+	font-weight: 700;
+	top: 0;
+}
+
+.nome-produto {
+	font-size: 20px;
+	bottom: 0;
+}
+
+.produto-preco {
+	font-size: 20px;
+	font-weight: 700;
+	bottom: 0;
+	right: 0;
+}
+
+.btns-container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.btns-container button{
+	font-weight: bold;
+	text-transform: uppercase;
+	border-radius: 25px;
+	height: 50px;
+	width: 150px;
+	cursor: pointer;
+}
+
+.add-cart-btn {
+	background-color: #FFF;
+	border: 1px solid #AAA;
+}
+
+.add-cart-btn:hover {
+	color: #FFF;
+	background-color: #000;
+	border: 1px solid #000;
+}
+
+.buy-now-btn {
+	color: #FFF;
+	background-color: #000;
+	border: 1px solid #000;
+}
+
+.buy-now-btn:hover {
+	color: #000;
+	background-color: #FFF;
+	border: 1px solid #AAA;
+}
