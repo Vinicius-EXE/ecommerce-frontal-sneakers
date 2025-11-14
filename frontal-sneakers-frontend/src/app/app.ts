@@ -8,10 +8,12 @@ import { Rodape } from './components/rodape/rodape';
 import { LoginCadastroPage } from './components/login-cadastro-page/login-cadastro-page';
 import { LoginContainer } from './components/login-container/login-container';
 import { CadastroContainer } from './components/cadastro-container/cadastro-container';
+import { CardPromocao } from "./components/card-promocao/card-promocao";
+import { CardMarca } from "./components/card-marca/card-marca";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Cabecalho, BannerHome, CardCategoria, CardProduto, Rodape, LoginCadastroPage, LoginContainer, CadastroContainer],
+  imports: [RouterOutlet, Cabecalho, BannerHome, CardCategoria, CardProduto, Rodape, LoginCadastroPage, LoginContainer, CadastroContainer, CardPromocao, CardMarca],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
