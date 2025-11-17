@@ -1,4 +1,4 @@
-.cadastro-container {
+.singup-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,8 +12,8 @@
     width: 630px;
 
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow:
@@ -25,7 +25,7 @@
     overflow: hidden;
 }
 
-.cadastro-container h1 {
+.singup-container h1 {
     font-size: 40px;
     font-weight: 900;
     margin-bottom: 25px;
@@ -38,7 +38,7 @@
     justify-content: center;
 }
 
-.cadastro-container p {
+.singup-container p {
     text-align: center;
     font-size: 32px;
 }
@@ -102,7 +102,7 @@ form input::placeholder {
     display: none;
 }
 
-.cadastrar-action-btn {
+.singup-action-btn {
     font-size: 16px;
     font-weight: 700;
     color: #FFF;
@@ -118,18 +118,22 @@ form input::placeholder {
     cursor: pointer;
 }
 
-.cadastrar-action-btn:hover {
+.singup-action-btn:hover {
     background-color: #FFF;
     color: #34A853;
 
     transition: 0.3s;
 }
 
-.go-to-login-btn {
+.go-to-singin-btn {
     color: #777;
 }
 
-.go-to-login-btn:hover {
+.go-to-singin-btn:hover {
     color: #333;
+}
+
+.go-to-singin-btn:visited {
+    color: #777;
 }
 

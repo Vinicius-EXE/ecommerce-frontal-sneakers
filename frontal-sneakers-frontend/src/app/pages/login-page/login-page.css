@@ -4,9 +4,10 @@
     align-items: center;
 
     background-color: #FDF4F2;
-}   
+}
 
-.form-container, .image-container {
+.form-container,
+.image-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,8 +16,22 @@
 
     height: 100vh;
     width: 50%;
+
+    z-index: 10;
 }
 
 .image-container img {
     height: 115%;
+}
+
+.triangle-background {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+
+    width: 1500px;
+    aspect-ratio: 1;
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    background: #D9D9D9;
 }

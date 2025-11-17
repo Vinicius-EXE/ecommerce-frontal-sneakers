@@ -1,18 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Cabecalho } from './components/cabecalho/cabecalho';
-import { BannerHome } from './components/banner-home/banner-home';
-import { CardCategoria } from './components/card-categoria/card-categoria';
-import { CardProduto } from './components/card-produto/card-produto';
-import { Rodape } from './components/rodape/rodape';
-import { LoginCadastroPage } from './components/login-cadastro-page/login-cadastro-page';
-import { LoginContainer } from './components/login-container/login-container';
-import { CadastroContainer } from './components/cadastro-container/cadastro-container';
-import { CardPromocao } from "./components/card-promocao/card-promocao";
-
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Cabecalho, BannerHome, CardCategoria, CardProduto, Rodape, LoginCadastroPage, LoginContainer, CadastroContainer, CardPromocao,],
+  imports: [ RouterOutlet ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
