@@ -1,5 +1,26 @@
-.produto-card {
+.produto-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 80vh;
+  width: 80%;
+}
+
+.produto-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 600px;
+
+}
+
+.produto-image img {
   width: 100%;
+}
+
+.produto-card {
   max-width: 600px;
   margin: 0 auto;
   background: #d9d9d9;
