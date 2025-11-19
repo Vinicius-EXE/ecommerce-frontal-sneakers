@@ -1,0 +1,159 @@
+/*layout base*/
+.adm {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #fdf4f2;
+    display: flex;
+    flex-direction: column;
+    font-family: inter, sans-serif;
+}
+
+/*topo*/
+.top-bar {
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    padding: 18px 24px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/*area principal*/
+.layout {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+/*menu lateral*/
+.sidebar {
+    width: 260px;
+    background-color: #979290;
+    padding: 24px;
+    box-sizing: border-box;
+    color: #232321;
+}
+
+.menu-title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/*conteudo principal*/
+.content {
+    flex: 1;
+    padding: 32px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+/*formulario*/
+.form-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    border: 1px solid #232321;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.badge {
+    background-color: #36323b;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+/*upload da imagem*/
+.upload-box {
+    border-radius: 8px;
+    border: 1px dashed #232321;
+    padding: 16px;
+    text-align: center;
+}
+
+.upload-title {
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color:#555;
+}
+
+/*botões*/
+.btn-row {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.update {
+    background-color: #232321;
+    color: white;
+}
+
+.delete {
+    background-color: #003f62;
+    color: white;
+}
+
+.cancel {
+    background-color: transparent;
+    border: 1px solid #232321;
+    color: #232321;
+}
