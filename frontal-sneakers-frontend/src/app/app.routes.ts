@@ -1,9 +1,12 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { SinginForm } from './components/singin-form/singin-form';
 import { SingupForm } from './components/singup-form/singup-form';
 import { LoginPage } from './pages/login-page/login-page';
+import { HomePage } from './pages/home-page/home-page';
+import { UserPage } from './pages/user-page/user-page';
+import { CartPage } from './pages/cart-page/cart-page';
+import { CatalogPage } from './pages/catalog-page/catalog-page';
 
 export const routes: Routes = [
     // Rota LoginPage - '/auth'
@@ -30,10 +33,34 @@ export const routes: Routes = [
         ]
     },
 
-    // Rota Padrão do Site - Home
+    // Rota HomePage '/home'
+    {
+        path: 'home', 
+        component: HomePage
+    },
+
+    // Rota UserPage '/user'
+    {
+        path: 'user', 
+        component: UserPage
+    },
+
+    // Rota CartPage '/cart'
+    {
+        path: 'cart', 
+        component: CartPage
+    },
+
+    // Rota CatalogPage '/catalog'
+    {
+        path: 'catalog', 
+        component: CatalogPage
+    },
+
+    // Rota Padrão do Site '/home'
     { 
         path: '', 
-        redirectTo: 'auth', 
+        redirectTo: 'home', 
         pathMatch: 'full' 
     }
 ];

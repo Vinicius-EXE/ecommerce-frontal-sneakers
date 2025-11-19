@@ -1,0 +1,42 @@
+.home-page-main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-family: 'Inria Sans', sans-serif;
+
+    width: 100%;
+}
+
+.category-grid-container {
+    padding: 15px;
+    width: 90%;
+}
+
+.infos-container {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    padding: 15px;
+    width: 90%;
+}
+
+.infos-container span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    
+    background-color: #EEE;
+    font-size: 18px;
+    text-transform: uppercase;
+    
+    border-radius: 20px;
+    height: 70px;
+    width: 300px;
+}
+
+.infos-container span:hover {
+    background-color: #DDD;
+    transition: 0.5s;
+}

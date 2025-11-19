@@ -16,7 +16,7 @@ header {
     justify-content: space-between;
 
     padding: 0 15px 0 15px;
-    width: 1750px;
+    width: 90%;
     height: 100px;
 }
 
@@ -115,4 +115,12 @@ header {
     scale: 1.1;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
     transition: 0.3s;
+}
+
+.icon-container a {
+    color: #FFF;
+}
+
+.icon-container:hover a {
+    color: #131313;
 }
