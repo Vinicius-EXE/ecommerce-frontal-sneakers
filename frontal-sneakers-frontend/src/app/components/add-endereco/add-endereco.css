@@ -1,0 +1,101 @@
+/*container principal*/
+.endereco-card {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    background: #d9d9d9;
+    border-radius: 10px;
+    padding: 32px;
+    box-sizing: border-box;
+    font-family: inter, sans-serif
+}
+
+/*titulo*/
+.card-title {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 32px;
+}
+
+.form-section {
+   margin-bottom: 32px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+/*forma do grid*/
+.form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.form-group input {
+    border: 1px solid #9a9a9a;
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 16px;
+    box-sizing: border-box;
+    }
+
+    /*selector de tipo (casa, trabalho)*/
+.type-select {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.type-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    background-color: #fff;
+    color: #000;
+    border-radius: 8px;
+    border: 1px solid #9a9a9a;
+
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.type-btn:hover {
+    background-color: #ececec;
+}
+
+/*marcador do botão*/
+.type-btn .icon {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #9a9a9a;
+    border-radius: 50%;
+}
+
+/*divisor*/
+.divider {
+    border: none;
+    border-top: 1px solid #000;
+    margin: 32px 0;
+}
+
+@media (max-width: 540px) {
+  .card-title {
+    font-size: 26px;
+  }
+
+  .section-title {
+    font-size: 20px;
+  }
+}

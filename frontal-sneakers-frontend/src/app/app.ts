@@ -3,9 +3,10 @@ import { RouterOutlet } from '@angular/router';
 import { Adm } from "./components/adm/adm";
 import { Cabecalho } from "./components/cabecalho/cabecalho";
 import { Rodape } from "./components/rodape/rodape";
+import { AddEndereco } from "./components/add-endereco/add-endereco";
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Adm, Cabecalho, Rodape],
+  imports: [RouterOutlet, Adm, Cabecalho, Rodape, AddEndereco],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
