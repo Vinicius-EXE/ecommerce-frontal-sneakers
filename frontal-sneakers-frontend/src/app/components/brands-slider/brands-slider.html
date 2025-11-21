@@ -1,0 +1,21 @@
+<div class="brands-slider-wrapper">
+    <div class="header" *ngIf="title">
+        <h2 class="slider-title">{{ title }}</h2>
+        <div class="nav-controls">
+            <button class="nav-btn prev" (click)="prev()">&#10094;</button>
+            <button class="nav-btn next" (click)="next()">&#10095;</button>
+        </div>
+    </div>
+
+    <div class="slider-container" (mouseenter)="stopAutoPlay()" (mouseleave)="startAutoPlay()">
+        <div class="slider-track-container">
+            <div class="slider-track" [style.transform]="transformStyle">
+                <div class="slider-item" *ngFor="let brand of brands">
+                    <div class="brand-card">
+                        <img [src]="brand.src" [alt]="brand.name" class="brand-icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

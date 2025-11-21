@@ -1,0 +1,14 @@
+<h2 *ngIf="title" class="slider-title">{{ title }}</h2>
+<div class="slider-container">
+    <button class="nav-btn prev" (click)="prev()">&#10094;</button>
+    
+    <div class="slider-track-container">
+        <div class="slider-track" [style.transform]="transformStyle">
+            <div class="slider-item" *ngFor="let card of cards; let i = index">
+                <app-card-produto></app-card-produto>
+            </div>
+        </div>
+    </div>
+
+    <button class="nav-btn next" (click)="next()">&#10095;</button>
+</div>
