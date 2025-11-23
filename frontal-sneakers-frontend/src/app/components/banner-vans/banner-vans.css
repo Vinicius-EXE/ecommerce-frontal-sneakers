@@ -1,0 +1,58 @@
+.banner-container {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+
+    background: linear-gradient(180deg, #C5C8C6 0%, #1E3659 100%);
+    color: white;
+    font-family: 'Inria Sans', sans-serif;
+
+    padding: 20px;
+    border-radius: 20px;
+    margin: 0 auto;
+    height: 380px;
+    width: 70%;
+}
+
+.left-content,
+.right-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.left-content {
+    width: 45%;
+}
+
+.right-content {
+    align-items: flex-end;
+    width: 55%;
+}
+
+.right-content img {
+    position: absolute;
+    bottom: 20px;
+    left: 250px;
+}
+
+.sneaker-name, .banner-title{
+    font-family: "Rowdies", sans-serif;
+    font-size: 60px;
+}
+
+.sneaker-name {
+    text-align: right;
+    width: 500px;
+}
+
+.sneaker-name {
+    text-transform: capitalize;
+}
+
+.banner-description {
+    font-size: 22px;
+    margin-bottom: 20px;
+}

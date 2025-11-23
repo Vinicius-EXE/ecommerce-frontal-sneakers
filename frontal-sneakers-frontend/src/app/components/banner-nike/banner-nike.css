@@ -1,0 +1,45 @@
+.banner-nike-container {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+
+    background: linear-gradient(180deg, #D6B5AC 0%, #A9776D 100%);
+    color: white;
+    font-family: 'Inria Sans', sans-serif;
+
+    padding: 20px;
+    border-radius: 20px;
+    margin: 0 auto;
+    height: 380px;
+    width: 70%;
+}
+
+.left-content,
+.right-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.left-content {
+    width: 60%;
+}
+
+.right-content {
+    flex-direction: column;
+    width: 40%;
+}
+
+.sneaker-name, .banner-title{
+    font-family: "Rowdies", sans-serif;
+    font-size: 60px;
+}
+
+.sneaker-name {
+    text-transform: capitalize;
+}
+
+.banner-description {
+    font-size: 22px;
+}
