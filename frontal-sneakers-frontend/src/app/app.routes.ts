@@ -8,8 +8,6 @@ import { UserPage } from './pages/user-page/user-page';
 import { CartPage } from './pages/cart-page/cart-page';
 import { CatalogPage } from './pages/catalog-page/catalog-page';
 import { ProductPage } from './pages/product-page/product-page';
-import { Adm } from './components/adm/adm';
-
 export const routes: Routes = [
     // Rota LoginPage - '/auth'
     {
@@ -63,12 +61,6 @@ export const routes: Routes = [
     {
         path: 'product', 
         component: ProductPage
-    },
-
-    // Rota AdminPage '/admin'
-    {
-        path: 'admin', 
-        component: Adm
     },
 
     // Rota Padrão do Site '/home'

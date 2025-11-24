@@ -1,27 +1,24 @@
-<app-header></app-header>
-<main class="catalog-page-content">
-    <figure class="banner-header">
-        <img src="assets/banner-runner.svg" alt="Foto de pessoas correndo">
-    </figure>
-    <section class="catalog-container">
-        <header class="catalog-header">
-            <span class="catalog-title">Running</span>
-            <span class="sort-options">
-                <p>Filtre por:</p>
-                <i class="fa-solid fa-arrow-down-wide-short"></i>
-            </span>
-        </header>
+<div class="page-wrapper">
+    <app-header></app-header>
+    <main class="catalog-page-content">
+        <app-banner-catalog></app-banner-catalog>
+        <section class="catalog-container">
+            <header class="catalog-header">
+                <span class="catalog-title">Tênis</span>
+                <span class="sort-options">
+                    <p>Filtre por:</p>
+                    <i class="fa-solid fa-arrow-down-wide-short"></i>
+                </span>
+            </header>
 
-        <div class="product-grid">
-            <app-card-produto></app-card-produto>
-            <app-card-produto></app-card-produto>
-            <app-card-produto></app-card-produto>
-            <app-card-produto></app-card-produto>
-            <app-card-produto></app-card-produto>
-            <app-card-produto></app-card-produto>
-            <app-card-produto></app-card-produto>
-            <app-card-produto></app-card-produto>
-        </div>
-    </section>
-</main>
-<app-rodape></app-rodape>
+            <div class="product-grid">
+               <app-card-produto></app-card-produto>
+               <app-card-produto></app-card-produto>
+               <app-card-produto></app-card-produto>
+               <app-card-produto></app-card-produto>
+               <app-card-produto></app-card-produto>
+            </div>
+        </section>
+    </main>
+    <app-rodape></app-rodape>
+</div>

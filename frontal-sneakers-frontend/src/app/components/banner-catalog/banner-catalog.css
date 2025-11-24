@@ -1,0 +1,46 @@
+.banner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    background-color: #e1d4ba;
+
+    width: 100%;
+    height: 100vh;
+
+    user-select: none
+}
+
+.banner-text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-family: "Rowdies", sans-serif;
+    color: #FFF;
+    text-transform: uppercase;
+
+    width: 1150px;
+}
+
+.banner-text-content span {
+    font-size: 64px;
+    width: 100%;
+}
+
+.banner-text-content h1 {
+    text-align: center;
+    font-size: 300px;
+    width: 100%;
+}
+
+.sneaker-image-container {
+    position: absolute;
+    bottom: 200px;
+}
+
+.sneaker-image-container img {
+    width: 850px;
+}
