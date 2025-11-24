@@ -1,0 +1,31 @@
+<div class="sidebar" [class.collapsed]="isCollapsed">
+    <div class="logo-container">
+        <img *ngIf="!isCollapsed" src="assets/logo-nome-frontal-sneakers-sfundo.svg" alt="Frontal Sneakers Logo"
+            class="logo-expanded">
+        <img *ngIf="isCollapsed" src="frontal-sneakers-favicon.svg" alt="Frontal Sneakers Icon" class="logo-collapsed">
+    </div>
+
+    <nav class="menu-container">
+        <ul class="menu-list">
+            <li *ngFor="let item of menuItems" class="menu-item">
+                <a href="{{ item.href }}" class="menu-link">
+                    <span class="material-icons icon">{{ item.icon }}</span>
+                    <span class="label" *ngIf="!isCollapsed">{{ item.label }}</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="footer-container">
+        <div class="menu-item logout" (click)="logout()">
+            <a href="#" class="menu-link">
+                <span class="material-icons icon">logout</span>
+                <span class="label" *ngIf="!isCollapsed">LogOut</span>
+            </a>
+        </div>
+
+        <div class="toggle-btn" (click)="toggleSidebar()">
+            <span class="material-icons">{{ isCollapsed ? 'chevron_right' : 'chevron_left' }}</span>
+        </div>
+    </div>
+</div>

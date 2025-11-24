@@ -8,6 +8,11 @@ import { UserPage } from './pages/user-page/user-page';
 import { CartPage } from './pages/cart-page/cart-page';
 import { CatalogPage } from './pages/catalog-page/catalog-page';
 import { ProductPage } from './pages/product-page/product-page';
+import { PersonalInfo } from './components/personal-info/personal-info';
+import { PaymentMethods } from './components/payment-methods/payment-methods';
+import { Addresses } from './components/addresses/addresses';
+import { Orders } from './components/orders/orders';
+import { SecurityArea } from './components/security-area/security-area';
 export const routes: Routes = [
     // Rota LoginPage - '/auth'
     {
@@ -61,6 +66,38 @@ export const routes: Routes = [
     {
         path: 'product', 
         component: ProductPage
+    },
+
+    // Rota UserPage - '/user'
+    {
+        path: 'user',
+        component: UserPage,
+        children: [
+            {
+                path: 'personal-info',
+                component: PersonalInfo
+            }, 
+
+            {
+                path: 'cards',
+                component: PaymentMethods 
+            },
+
+            {
+                path: 'addresses',
+                component: Addresses 
+            },
+
+            {
+                path: 'orders',
+                component: Orders 
+            },
+
+            {
+                path: 'security',
+                component: SecurityArea
+            }
+        ]
     },
 
     // Rota Padrão do Site '/home'
