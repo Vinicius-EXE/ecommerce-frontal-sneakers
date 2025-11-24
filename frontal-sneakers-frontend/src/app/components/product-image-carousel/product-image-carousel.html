@@ -1,0 +1,10 @@
+<c-carousel [interval]="5000" transition="crossfade" class="product-carousel">
+    <c-carousel-indicators></c-carousel-indicators>
+    <c-carousel-inner>
+        <c-carousel-item *ngFor="let slide of slides">
+            <img [src]="slide.src" class="d-block w-100 carousel-img" alt="{{slide.title}}" loading="lazy" />
+        </c-carousel-item>
+    </c-carousel-inner>
+    <c-carousel-control class="control-slide-btn" caption="Previous" direction="prev"></c-carousel-control>
+    <c-carousel-control class="control-slide-btn" caption="Next" direction="next"></c-carousel-control>
+</c-carousel>

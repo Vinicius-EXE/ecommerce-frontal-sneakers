@@ -1,0 +1,143 @@
+.buy-product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Inria Sans', sans-serif;
+    background-color: #E9E9E9;
+    border-radius: 20px;
+    padding: 2rem;
+    height: 380px;
+    width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.price-container {
+    margin-bottom: 1.5rem;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #666;
+    font-size: 1rem;
+}
+
+.current-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.installments {
+    font-style: italic;
+    color: #333;
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.section {
+    margin-bottom: 1.5rem;
+}
+
+.section-label {
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.color-option {
+    background: white;
+    border-radius: 12px;
+    padding: 5px;
+    display: inline-block;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.color-option img {
+    width: 80px;
+    height: auto;
+    display: block;
+}
+
+.size-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.size-btn {
+    background-color: #464646;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 50px;
+    height: 35px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.size-btn:hover,
+.size-btn.selected {
+    background-color: #222;
+}
+
+.actions-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.quantity-control {
+    background-color: #FFF;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    height: 50px;
+}
+
+.quantity-control button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.quantity-control span {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0 15px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.buy-btn {
+    background-color: #000;
+    color: #FFF;
+    border: 2.5px solid #000;
+    border-radius: 25px;
+    padding: 0 30px;
+    height: 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-style: italic;
+    cursor: pointer;
+    flex-grow: 1;
+    transition: all 0.3s;
+}
+
+.buy-btn:hover {
+    background-color: #FFF;
+    color: #000;
+}

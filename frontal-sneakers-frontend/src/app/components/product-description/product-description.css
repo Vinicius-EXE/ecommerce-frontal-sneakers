@@ -1,0 +1,17 @@
+.description-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Inria Sans', sans-serif;
+    background-color: #E9E9E9;
+    border-radius: 20px;
+    padding: 2rem;
+    height: 380px;
+    width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.description-container h2 {
+    font-size: 2rem;
+    font-weight: 800;
+}

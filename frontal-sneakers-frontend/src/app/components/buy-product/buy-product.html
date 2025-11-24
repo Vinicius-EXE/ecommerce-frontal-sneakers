@@ -1,0 +1,33 @@
+<div class="buy-product-card">
+    <div class="text-content">
+        <h1 class="product-title">Tênis ASICS GEL-NYC</h1>
+
+        <div class="price-container">
+            <span class="old-price">R$ 899,99</span>
+            <span class="current-price">R$ 719,99</span>
+            <p class="installments">ou ate 10x de <strong>R$ 71,99</strong></p>
+        </div>
+    </div>
+
+    <div class="section size-section">
+        <p class="section-label">Tamanho:</p>
+        <div class="size-grid">
+            <button *ngFor="let size of sizes" class="size-btn" [class.selected]="selectedSize === size"
+                (click)="selectSize(size)">
+                {{ size }}
+            </button>
+        </div>
+    </div>
+
+    <div class="section quantity-section">
+        <p class="section-label">Quantidade:</p>
+        <div class="actions-row">
+            <div class="quantity-control">
+                <button (click)="decrementQuantity()">−</button>
+                <span>{{ quantity }}</span>
+                <button (click)="incrementQuantity()">+</button>
+            </div>
+            <button class="buy-btn">Compre aqui</button>
+        </div>
+    </div>
+</div>

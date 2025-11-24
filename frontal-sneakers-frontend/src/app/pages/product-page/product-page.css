@@ -1,6 +1,28 @@
-.page {
+.page-content {
     display: flex;
     flex-direction: column;
+    
+    background: radial-gradient(circle, rgba(233, 233, 233, 1) 40%, rgba(180, 180, 180, 1) 80%, rgba(115, 115, 115, 1) 100%);
 
-    padding: 120px 0 0 430px;
+    min-height: 100vh;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 0;
+    margin: 100px auto 0;
+    width: 90%;
+}
+
+.right-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 800px;
+    width: 600px;
 }
