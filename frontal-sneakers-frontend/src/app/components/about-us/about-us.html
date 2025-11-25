@@ -1,0 +1,43 @@
+<div class="about-container">
+  
+  <header class="hero-section">
+    <h1>FRONTAL <span class="highlight">SNEAKERS</span></h1>
+    <p class="tagline">Mais do que tênis. Cultura aos seus pés.</p>
+  </header>
+
+  <section class="content-grid">
+    <div class="text-column">
+      <h2>Quem Somos</h2>
+      <p>
+        Nascida da paixão pelo asfalto e pelo estilo, a <strong>Frontal Sneakers</strong> não é apenas uma loja de tênis; 
+        nós somos o ponto de encontro entre o conforto e a atitude.
+      </p>
+      <p>
+        Entendemos que cada caixa carrega uma história. Seja aquele <em>Jordan</em> clássico ou o último lançamento 
+        da <em>Yeezy</em>, nós trabalhamos incansavelmente para trazer o que há de mais exclusivo no mundo dos sneakers 
+        diretamente para a sua coleção.
+      </p>
+      <p>
+        Nosso compromisso é simples: conectar você ao estilo que te define, sem barreiras.
+      </p>
+      
+      <button class="cta-button">Ver Coleção</button>
+    </div>
+
+    <div class="image-column">
+      <div class="image-card">
+        <img src="assets/frontal-sneakers-logo-sfundo.svg" alt="Frontal Sneakers Mascote" class="mascot-img">
+        <div class="blob"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section">
+    <div class="feature-card" *ngFor="let item of features">
+      <div class="icon">{{ item.icon }}</div>
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.description }}</p>
+    </div>
+  </section>
+
+</div>
