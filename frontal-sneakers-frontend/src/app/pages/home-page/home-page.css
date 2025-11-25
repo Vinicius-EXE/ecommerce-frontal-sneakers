@@ -34,7 +34,11 @@
     
     border-radius: 20px;
     height: 70px;
-    width: 300px;
+    width: 310px;
+}
+
+.infos-container span p {
+    margin: auto 0;
 }
 
 .infos-container span:hover {

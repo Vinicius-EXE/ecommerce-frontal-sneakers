@@ -5,7 +5,6 @@ import { SingupForm } from './components/singup-form/singup-form';
 import { LoginPage } from './pages/login-page/login-page';
 import { HomePage } from './pages/home-page/home-page';
 import { UserPage } from './pages/user-page/user-page';
-import { CartPage } from './pages/cart-page/cart-page';
 import { CatalogPage } from './pages/catalog-page/catalog-page';
 import { ProductPage } from './pages/product-page/product-page';
 import { PersonalInfo } from './components/personal-info/personal-info';
@@ -13,6 +12,8 @@ import { PaymentMethods } from './components/payment-methods/payment-methods';
 import { Addresses } from './components/addresses/addresses';
 import { Orders } from './components/orders/orders';
 import { SecurityArea } from './components/security-area/security-area';
+import { AboutUsComponent } from './pages/about-us/about-us';
+import { CheckoutComponent } from './pages/check-out/check-out';
 export const routes: Routes = [
     // Rota LoginPage - '/auth'
     {
@@ -53,12 +54,12 @@ export const routes: Routes = [
     // Rota CartPage '/cart'
     {
         path: 'cart', 
-        component: CartPage
+        component: CheckoutComponent
     },
 
-    // Rota CatalogPage '/catalog'
+    // Rota CatalogPage '/products'
     {
-        path: 'catalog', 
+        path: 'products', 
         component: CatalogPage
     },
 
@@ -98,6 +99,12 @@ export const routes: Routes = [
                 component: SecurityArea
             }
         ]
+    },
+    
+    // Rota AboutUsPage '/about-us'
+    {
+        path: 'about-us', 
+        component: AboutUsComponent
     },
 
     // Rota Padrão do Site '/home'
