@@ -1,1 +1,56 @@
-<p>payment-methods works!</p>
+<main class="main-container">
+    <h2>Métodos de Pagamento</h2>
+
+    <div class="cards-list">
+        <div *ngFor="let card of savedCards; let i = index" class="card-item" [class.selected]="card.selected"
+            (click)="selectCard(i)">
+            <div class="card-info">
+                <span class="card-nickname">{{ card.nickname }}</span>
+                <span class="card-holder">{{ card.holderName }}</span>
+                <span class="card-number">**** **** **** {{ card.lastDigits }}</span>
+            </div>
+            <input type="radio" [checked]="card.selected" name="selectedCard">
+        </div>
+    </div>
+
+    <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" class="payment-form">
+        <h3>Adicionar Novo Cartão</h3>
+
+        <div class="form-group">
+            <label for="cardNumber">Número do cartão</label>
+            <input type="text" id="cardNumber" formControlName="cardNumber" (input)="onCardNumberInput($event)"
+                placeholder="0000 0000 0000 0000">
+        </div>
+
+        <div class="form-group">
+            <label for="holderName">Nome do titular</label>
+            <input type="text" id="holderName" formControlName="holderName" placeholder="Ex.: Maria Lopes">
+            <small>Conforme aparece no cartão.</small>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="expiry">Vencimento</label>
+                <input type="text" id="expiry" formControlName="expiry" (input)="onExpiryInput($event)"
+                    placeholder="MM/AA">
+            </div>
+            <div class="form-group">
+                <label for="cvv">Código de segurança</label>
+                <input type="text" id="cvv" formControlName="cvv" placeholder="Ex.: 123">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="holderCpf">Documento do titular</label>
+            <input type="text" id="holderCpf" formControlName="holderCpf" (input)="onCpfInput($event)"
+                placeholder="999.999.999-99">
+        </div>
+
+        <div class="form-group">
+            <label for="nickname">Apelido do cartão</label>
+            <input type="text" id="nickname" formControlName="nickname" placeholder="Ex.: Nubank">
+        </div>
+
+        <button type="submit" class="save-btn" [disabled]="!paymentForm.valid">Adicionar Cartão</button>
+    </form>
+</main>

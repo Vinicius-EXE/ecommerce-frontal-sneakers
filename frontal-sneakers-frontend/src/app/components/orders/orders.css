@@ -1,0 +1,97 @@
+:host {
+    width: 100%;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    font-family: "Inria Sans", sans-serif;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    padding: 20px;
+    height: 100%;
+    position: relative;
+    overflow-y: auto;
+}
+
+h2 {
+    color: #fff;
+    margin: 0;
+}
+
+/* Cards List Styles */
+.cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.card-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-nickname {
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+}
+
+.card-holder,
+.card-number {
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* Status Styles */
+.order-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.status-delivered {
+    background: #28a745;
+}
+
+.status-shipped {
+    background: #007bff;
+}
+
+.status-approved {
+    background: #17a2b8;
+}
+
+.status-analysis {
+    background: #ffc107;
+    color: #000;
+}
+
+.status-cancelled {
+    background: #dc3545;
+}

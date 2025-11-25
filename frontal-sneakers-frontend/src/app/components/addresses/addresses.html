@@ -1,1 +1,97 @@
-<p>addresses works!</p>
+<main class="main-container">
+    <h2>Meus Endereços</h2>
+
+    <div class="cards-list">
+        <div *ngFor="let addr of savedAddresses; let i = index" class="card-item" [class.selected]="addr.selected"
+            (click)="selectAddress(i)">
+            <div class="card-info">
+                <span class="card-nickname">{{ addr.nickname }}</span>
+                <span class="card-holder">{{ addr.street }}, {{ addr.number }} - {{ addr.neighborhood }}</span>
+                <span class="card-number">{{ addr.cep }}</span>
+            </div>
+            <input type="radio" [checked]="addr.selected" name="selectedAddress">
+        </div>
+    </div>
+
+    <form [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="address-form">
+        <h3>Adicionar Novo Endereço</h3>
+
+        <div class="form-group">
+            <label for="cep">CEP</label>
+            <div class="cep-container">
+                <input type="text" id="cep" formControlName="cep" (input)="onCepInput($event)"
+                    placeholder="Ex.: 05410001">
+                <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank"
+                    class="cep-link">Não sei meu CEP</a>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="street">Rua / Avenida</label>
+                <input type="text" id="street" formControlName="street" placeholder="Ex.: Avenida los Leones">
+            </div>
+            <div class="form-group">
+                <label for="number">Número</label>
+                <div class="number-container">
+                    <input type="text" id="number" formControlName="number" placeholder="Ex.: 456">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="noNumber">
+                        <label for="noNumber">Sem número</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="neighborhood">Bairro</label>
+            <input type="text" id="neighborhood" formControlName="neighborhood" placeholder="Ex.: Centro">
+        </div>
+
+        <div class="form-group">
+            <label for="complement">Complemento (opcional)</label>
+            <input type="text" id="complement" formControlName="complement" placeholder="Ex.: Apto 201">
+        </div>
+
+        <div class="form-group">
+            <label for="reference">Informações adicionais deste endereço (opcional)</label>
+            <textarea id="reference" formControlName="reference"
+                placeholder="Ex.: Entre ruas, cor do edifício, não tem campainha." rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Este é o seu trabalho ou sua casa?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" id="home" value="home" formControlName="type">
+                    <label for="home"><i class="fa-solid fa-house"></i> Casa</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="work" value="work" formControlName="type">
+                    <label for="work"><i class="fa-solid fa-briefcase"></i> Trabalho</label>
+                </div>
+            </div>
+        </div>
+
+        <h3>Dados de contato</h3>
+        <p class="subtitle">Se houver algum problema no envio, você receberá uma ligação neste número.</p>
+
+        <div class="form-group">
+            <label for="contactName">Nome e sobrenome</label>
+            <input type="text" id="contactName" formControlName="contactName" placeholder="Vinicius Alves Mateus">
+        </div>
+
+        <div class="form-group">
+            <label for="contactPhone">Telefone de contato</label>
+            <input type="text" id="contactPhone" formControlName="contactPhone" (input)="onPhoneInput($event)"
+                placeholder="(11) 97818-5073">
+        </div>
+
+        <div class="form-group">
+            <label for="nickname">Apelido do endereço</label>
+            <input type="text" id="nickname" formControlName="nickname" placeholder="Ex.: Minha Casa">
+        </div>
+
+        <button type="submit" class="save-btn" [disabled]="!addressForm.valid">Adicionar Endereço</button>
+    </form>
+</main>

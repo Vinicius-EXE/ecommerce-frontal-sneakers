@@ -1,1 +1,40 @@
-<p>security-area works!</p>
+<main class="main-container">
+    <h2>Segurança</h2>
+
+    <form [formGroup]="securityForm" (ngSubmit)="onSubmit()" class="security-form">
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" formControlName="email" placeholder="arthursp@email.com">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Nova Senha</label>
+            <input type="password" id="password" formControlName="password" placeholder="********">
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword">Confirmar Nova Senha</label>
+            <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="********">
+        </div>
+
+        <button type="submit" class="save-btn" [disabled]="!securityForm.valid">Salvar Alterações</button>
+    </form>
+
+    <div class="modal-overlay" *ngIf="showConfirmation">
+        <div class="modal-content">
+            <h3>Confirmar Alterações</h3>
+            <p>Para sua segurança, digite sua senha atual para confirmar as alterações.</p>
+
+            <div class="form-group">
+                <label for="currentPassword">Senha Atual</label>
+                <input type="password" id="currentPassword" [formControl]="currentPassword" placeholder="********">
+            </div>
+
+            <div class="modal-actions">
+                <button class="cancel-btn" (click)="cancelConfirmation()">Cancelar</button>
+                <button class="confirm-btn" (click)="confirmSave()"
+                    [disabled]="!currentPassword.valid">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</main>
