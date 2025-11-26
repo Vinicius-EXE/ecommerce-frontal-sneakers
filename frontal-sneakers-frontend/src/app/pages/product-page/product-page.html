@@ -1,4 +1,12 @@
-<main class="page-content" *ngIf="product">
+<div *ngIf="isLoading" class="loading-container">
+    <p>Carregando produto...</p>
+</div>
+
+<div *ngIf="errorMessage" class="error-container">
+    <p>{{ errorMessage }}</p>
+</div>
+
+<main class="page-content" *ngIf="!isLoading && !errorMessage && product">
     <app-header></app-header>
     <section class="header-content">
         <app-product-image-carousel [images]="product.images"></app-product-image-carousel>

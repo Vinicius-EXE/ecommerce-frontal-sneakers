@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CartService } from '../../services/cart.service';
+import { OrderService } from '../../services/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -12,12 +15,17 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 export class CheckoutComponent implements OnInit {
   currentStep: number = 1;
   checkoutForm: FormGroup;
-  
-  // Dados simulados do carrinho
-  cartTotal: number = 899.90; // Preço do Asics da imagem
-  freight: number = 0; // Frete grátis geralmente agrada mais
 
-  constructor(private fb: FormBuilder) {
+  cartItems: any[] = [];
+  cartTotal: number = 0;
+  freight: number = 0;
+
+  constructor(
+    private fb: FormBuilder,
+    private cartService: CartService,
+    private orderService: OrderService,
+    private router: Router
+  ) {
     this.checkoutForm = this.fb.group({
       address: this.fb.group({
         cep: ['', [Validators.required, Validators.minLength(9)]],
@@ -36,6 +44,11 @@ export class CheckoutComponent implements OnInit {
         cardCvv: [''],
         cpf: ['']
       })
+    });
+
+    this.cartService.cart$.subscribe(items => {
+      this.cartItems = items;
+      this.cartTotal = this.cartService.getCartTotal();
     });
   }
 
@@ -60,7 +73,8 @@ export class CheckoutComponent implements OnInit {
       this.currentStep++;
     } else {
       this.checkoutForm.markAllAsTouched(); // Mostra erros se houver
-      if(this.currentStep === 1) alert("Preencha o endereço corretamente.");
+      if (this.currentStep === 1) alert("Preencha o endereço corretamente.");
+      if (this.currentStep === 2) alert("Preencha os dados de pagamento corretamente.");
     }
   }
 
@@ -69,12 +83,37 @@ export class CheckoutComponent implements OnInit {
   }
 
   finishOrder() {
-    console.log('Dados do Pedido:', this.checkoutForm.value);
-    alert('Pedido realizado com sucesso! Integração com API pronta.');
+    if (this.cartItems.length === 0) {
+      alert('Seu carrinho está vazio!');
+      return;
+    }
+
+    const orderData = {
+      address: this.checkoutForm.get('address')?.value,
+      payment: this.checkoutForm.get('payment')?.value,
+      items: this.cartItems.map(item => ({
+        productId: item.product.id,
+        quantity: item.quantity,
+        price: item.product.price
+      })),
+      total: this.cartTotal
+    };
+
+    this.orderService.createOrder(orderData).subscribe({
+      next: (res) => {
+        alert('Pedido realizado com sucesso!');
+        this.cartService.clearCart();
+        this.router.navigate(['/user/orders']);
+      },
+      error: (err) => {
+        console.error('Erro ao criar pedido', err);
+        alert('Erro ao realizar pedido. Tente novamente.');
+      }
+    });
   }
 
   // --- Formatadores de Input (Máscaras) ---
-  
+
   // Apenas números e formatação de CEP (00000-000)
   formatCEP(event: any) {
     let value = event.target.value.replace(/\D/g, '');
@@ -104,7 +143,7 @@ export class CheckoutComponent implements OnInit {
     value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
     this.checkoutForm.get('payment.cpf')?.setValue(value.substring(0, 14));
   }
-  
+
   // Apenas números genérico
   onlyNumbers(event: any, controlName: string, groupName: string) {
     const value = event.target.value.replace(/\D/g, '');

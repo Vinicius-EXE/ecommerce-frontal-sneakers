@@ -32,7 +32,8 @@ public class ProductService {
     }
 
     public Product getProductById(Long id) {
-        return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+        return productRepository.findById(id).orElseThrow(
+                () -> new com.frontalsneakers.api.exception.ResourceNotFoundException("Product not found"));
     }
 
     public Product createProduct(Product product) {

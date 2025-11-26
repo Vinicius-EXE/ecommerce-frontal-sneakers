@@ -18,6 +18,8 @@ import { ProductService } from '../../services/product.service';
 })
 export class ProductPage implements OnInit {
   product: any;
+  isLoading: boolean = true;
+  errorMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -27,16 +29,28 @@ export class ProductPage implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = params['id'];
+      console.log('ProductPage: ID from route:', id);
       if (id) {
         this.loadProduct(id);
+      } else {
+        this.isLoading = false;
+        this.errorMessage = 'Produto não encontrado.';
       }
     });
   }
 
   loadProduct(id: number) {
+    this.isLoading = true;
     this.productService.getProduct(id).subscribe({
-      next: (data) => this.product = data,
-      error: (err) => console.error('Error loading product', err)
+      next: (data) => {
+        this.product = data;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error loading product', err);
+        this.errorMessage = 'Erro ao carregar produto. Tente novamente mais tarde.';
+        this.isLoading = false;
+      }
     });
   }
 }

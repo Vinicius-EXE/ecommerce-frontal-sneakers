@@ -1,26 +1,29 @@
 <div class="checkout-wrapper">
-  
+
   <div class="stepper-container">
     <div class="step" [class.active]="currentStep >= 1" [class.finished]="currentStep > 1">
-      <span>1</span> <p>Entrega</p>
+      <span>1</span>
+      <p>Entrega</p>
     </div>
     <div class="line" [class.filled]="currentStep > 1"></div>
     <div class="step" [class.active]="currentStep >= 2" [class.finished]="currentStep > 2">
-      <span>2</span> <p>Pagamento</p>
+      <span>2</span>
+      <p>Pagamento</p>
     </div>
     <div class="line" [class.filled]="currentStep > 2"></div>
     <div class="step" [class.active]="currentStep >= 3">
-      <span>3</span> <p>Revisão</p>
+      <span>3</span>
+      <p>Revisão</p>
     </div>
   </div>
 
   <div class="main-content">
-    
+
     <div class="form-section" [formGroup]="checkoutForm">
 
       <div *ngIf="currentStep === 1" formGroupName="address" class="animate-fade">
         <h2 class="section-title">Onde vamos entregar?</h2>
-        
+
         <div class="input-group">
           <label>CEP</label>
           <input type="text" formControlName="cep" placeholder="00000-000" (input)="formatCEP($event)" maxlength="9">
@@ -81,7 +84,8 @@
         <div class="credit-card-form" *ngIf="checkoutForm.get('payment.method')?.value === 'credit_card'">
           <div class="input-group">
             <label>Número do Cartão</label>
-            <input type="text" formControlName="cardNumber" placeholder="0000 0000 0000 0000" (input)="formatCardNumber($event)" maxlength="19">
+            <input type="text" formControlName="cardNumber" placeholder="0000 0000 0000 0000"
+              (input)="formatCardNumber($event)" maxlength="19">
           </div>
 
           <div class="input-group">
@@ -92,17 +96,20 @@
           <div class="row">
             <div class="input-group">
               <label>Validade</label>
-              <input type="text" formControlName="cardExpiry" placeholder="MM/AA" (input)="formatExpiry($event)" maxlength="5">
+              <input type="text" formControlName="cardExpiry" placeholder="MM/AA" (input)="formatExpiry($event)"
+                maxlength="5">
             </div>
             <div class="input-group">
               <label>CVV</label>
-              <input type="text" formControlName="cardCvv" placeholder="123" maxlength="4" (input)="onlyNumbers($event, 'cardCvv', 'payment')">
+              <input type="text" formControlName="cardCvv" placeholder="123" maxlength="4"
+                (input)="onlyNumbers($event, 'cardCvv', 'payment')">
             </div>
           </div>
-          
+
           <div class="input-group">
             <label>CPF do Titular</label>
-            <input type="text" formControlName="cpf" placeholder="000.000.000-00" (input)="formatCPF($event)" maxlength="14">
+            <input type="text" formControlName="cpf" placeholder="000.000.000-00" (input)="formatCPF($event)"
+              maxlength="14">
           </div>
         </div>
 
@@ -114,13 +121,13 @@
 
       <div *ngIf="currentStep === 3" class="animate-fade">
         <h2 class="section-title">Tudo certo?</h2>
-        
+
         <div class="review-card">
           <div class="review-row">
             <span class="label">Entregar em:</span>
             <span class="value">
-              {{ checkoutForm.get('address.street')?.value }}, 
-              {{ checkoutForm.get('address.number')?.value }} - 
+              {{ checkoutForm.get('address.street')?.value }},
+              {{ checkoutForm.get('address.number')?.value }} -
               {{ checkoutForm.get('address.city')?.value }}
             </span>
           </div>
@@ -138,34 +145,12 @@
 
     </div>
 
-    <div class="order-summary">
-      <h3>Resumo do Pedido</h3>
-      <div class="product-mini">
-        <div class="img-placeholder">👟</div> <div>
-          <h4>Asics Gel-NYC Gray</h4>
-          <p>Tamanho: 41</p>
-        </div>
-      </div>
-      
-      <div class="divider"></div>
+    <div class="divider"></div>
 
-      <div class="summary-line">
-        <span>Subtotal</span>
-        <span>R$ {{ cartTotal | number:'1.2-2' }}</span>
-      </div>
-      <div class="summary-line">
-        <span>Frete</span>
-        <span *ngIf="freight === 0" class="free">Grátis</span>
-        <span *ngIf="freight > 0">R$ {{ freight | number:'1.2-2' }}</span>
-      </div>
-      
-      <div class="divider"></div>
-      
-      <div class="summary-total">
-        <span>Total</span>
-        <span>R$ {{ (cartTotal + freight) | number:'1.2-2' }}</span>
-      </div>
+    <div class="summary-total">
+      <span>Total</span>
+      <span>R$ {{ (cartTotal + freight) | number:'1.2-2' }}</span>
     </div>
-
   </div>
+
 </div>

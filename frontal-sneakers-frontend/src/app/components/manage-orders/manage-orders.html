@@ -4,8 +4,9 @@
     <div class="cards-list">
         <div *ngFor="let order of orders" class="card-item">
             <div class="card-info">
-                <span class="card-nickname">Pedido #{{ order.id }} - {{ order.customer }}</span>
-                <span class="card-holder">Data: {{ order.date }} | Total: R$ {{ order.total | number:'1.2-2' }}</span>
+                <span class="card-nickname">Pedido #{{ order.id }} - {{ order.user?.name || 'Cliente' }}</span>
+                <span class="card-holder">Data: {{ order.date | date:'dd/MM/yyyy' }} | Total: {{ order.total |
+                    currency:'BRL' }}</span>
                 <span class="card-number" [ngClass]="{
                     'status-pending': order.status === 'PAGAMENTO EM ANDAMENTO',
                     'status-approved': order.status === 'PAGAMENTO APROVADO',
@@ -25,19 +26,18 @@
             <h3>Detalhes do Pedido #{{ selectedOrder?.id }}</h3>
 
             <div class="order-details">
-                <p><strong>Cliente:</strong> {{ selectedOrder?.customer }}</p>
-                <p><strong>Data:</strong> {{ selectedOrder?.date }}</p>
+                <p><strong>Cliente:</strong> {{ selectedOrder?.user?.name || 'Cliente' }}</p>
+                <p><strong>Data:</strong> {{ selectedOrder?.date | date:'dd/MM/yyyy HH:mm' }}</p>
                 <p><strong>Endereço de Entrega:</strong> {{ selectedOrder?.address }}</p>
 
                 <h4>Itens:</h4>
                 <ul class="items-list">
                     <li *ngFor="let item of selectedOrder?.items">
-                        {{ item.quantity }}x {{ item.name }} (Tam: {{ item.size }}) - R$ {{ item.price | number:'1.2-2'
-                        }}
+                        {{ item.quantity }}x {{ item.product?.name }} - {{ item.price | currency:'BRL' }}
                     </li>
                 </ul>
 
-                <p class="total"><strong>Total:</strong> R$ {{ selectedOrder?.total | number:'1.2-2' }}</p>
+                <p class="total"><strong>Total:</strong> {{ selectedOrder?.total | currency:'BRL' }}</p>
 
                 <div class="form-group">
                     <label for="status">Situação do Pedido:</label>
