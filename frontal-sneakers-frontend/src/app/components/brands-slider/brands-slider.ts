@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-brands-slider',
@@ -27,8 +27,12 @@ export class BrandsSlider {
   itemsPerView = 5;
   intervalId: any;
 
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+
   ngOnInit() {
-    this.startAutoPlay();
+    if (isPlatformBrowser(this.platformId)) {
+      this.startAutoPlay();
+    }
   }
 
   ngOnDestroy() {

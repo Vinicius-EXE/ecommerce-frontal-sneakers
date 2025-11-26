@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +14,17 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.css',
 })
 export class Header {
-  constructor(private authService: AuthService, private router: Router) { }
+  cartCount$: Observable<number>;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private cartService: CartService
+  ) {
+    this.cartCount$ = this.cartService.cart$.pipe(
+      map(items => items.reduce((acc, item) => acc + item.quantity, 0))
+    );
+  }
 
   navigateToUserArea() {
     if (this.authService.isAuthenticated()) {

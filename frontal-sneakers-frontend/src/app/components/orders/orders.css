@@ -1,97 +1,95 @@
-:host {
-    width: 100%;
-}
-
 .main-container {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-
-    font-family: "Inria Sans", sans-serif;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-
     padding: 20px;
-    height: 100%;
-    position: relative;
-    overflow-y: auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 h2 {
-    color: #fff;
-    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
 }
 
-/* Cards List Styles */
 .cards-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 15px;
 }
 
 .card-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    transition: all 0.3s ease;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    transition: background-color 0.2s;
 }
 
 .card-item:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background-color: #f9f9f9;
 }
 
 .card-info {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
 }
 
 .card-nickname {
-    font-weight: bold;
-    font-size: 16px;
-    color: #fff;
-}
-
-.card-holder,
-.card-number {
-    font-size: 14px;
-    color: #ccc;
-}
-
-/* Status Styles */
-.order-status {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #fff;
-}
-
-.status-delivered {
-    background: #28a745;
-}
-
-.status-shipped {
-    background: #007bff;
-}
-
-.status-approved {
-    background: #17a2b8;
-}
-
-.status-analysis {
-    background: #ffc107;
+    font-weight: 700;
+    font-size: 1rem;
     color: #000;
 }
 
+.card-holder {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.card-number {
+    font-weight: 600;
+    color: #333;
+}
+
+.order-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-delivered {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-shipped {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.status-approved {
+    background-color: #fff3e0;
+    color: #ef6c00;
+}
+
+.status-analysis {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+}
+
 .status-cancelled {
-    background: #dc3545;
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.no-orders {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+    font-style: italic;
 }

@@ -5,6 +5,7 @@ import { isPlatformBrowser } from '@angular/common';
 export interface CartItem {
     product: any;
     quantity: number;
+    size: string;
 }
 
 @Injectable({
@@ -23,21 +24,26 @@ export class CartService {
         }
     }
 
-    addToCart(product: any) {
+    addToCart(product: any, size: string) {
         const currentCart = this.cartItems.value;
-        const existingItem = currentCart.find(item => item.product.id === product.id);
+        const existingItem = currentCart.find(item => item.product.id === product.id && item.size === size);
 
         if (existingItem) {
             existingItem.quantity++;
         } else {
-            currentCart.push({ product, quantity: 1 });
+            currentCart.push({ product, quantity: 1, size });
         }
 
         this.updateCart(currentCart);
     }
 
-    removeFromCart(productId: number) {
-        const currentCart = this.cartItems.value.filter(item => item.product.id !== productId);
+    removeFromCart(productId: number, size?: string) {
+        let currentCart;
+        if (size) {
+            currentCart = this.cartItems.value.filter(item => !(item.product.id === productId && item.size === size));
+        } else {
+            currentCart = this.cartItems.value.filter(item => item.product.id !== productId);
+        }
         this.updateCart(currentCart);
     }
 

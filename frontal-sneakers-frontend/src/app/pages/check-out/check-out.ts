@@ -149,4 +149,8 @@ export class CheckoutComponent implements OnInit {
     const value = event.target.value.replace(/\D/g, '');
     this.checkoutForm.get(`${groupName}.${controlName}`)?.setValue(value);
   }
+
+  removeItem(productId: number) {
+    this.cartService.removeFromCart(productId);
+  }
 }

@@ -12,11 +12,22 @@ import { CartService } from '../../services/cart.service';
 })
 export class ProductCard {
   @Input() product: any;
+  selectedSize: string = '';
+  sizes: string[] = ['34', '35', '36', '37', '38', '39', '40', '41', '42', '43'];
 
   constructor(private cartService: CartService) { }
 
+  selectSize(size: string) {
+    this.selectedSize = size;
+  }
+
   addToCart() {
-    this.cartService.addToCart(this.product);
+    if (!this.selectedSize) {
+      alert('Por favor, selecione um tamanho.');
+      return;
+    }
+    this.cartService.addToCart(this.product, this.selectedSize);
     alert('Produto adicionado ao carrinho!');
+    this.selectedSize = ''; // Reset selection
   }
 }

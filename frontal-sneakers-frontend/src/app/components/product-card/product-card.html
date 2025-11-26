@@ -10,6 +10,16 @@
         <span class="produto-preco">{{ product.price | currency:'BRL' }}</span>
     </div>
 
+    <div class="sizes-container">
+        <span class="size-label">Tamanho:</span>
+        <div class="sizes-list">
+            <button *ngFor="let size of sizes" class="size-btn" [class.selected]="selectedSize === size"
+                (click)="selectSize(size)">
+                {{ size }}
+            </button>
+        </div>
+    </div>
+
     <div class="btns-container">
         <button class="add-cart-btn" (click)="addToCart()">Add to Cart</button>
         <button class="buy-now-btn" [routerLink]="['/product', product.id]">Buy Now</button>

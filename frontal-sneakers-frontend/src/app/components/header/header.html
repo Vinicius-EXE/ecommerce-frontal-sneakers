@@ -12,7 +12,10 @@
     </nav>
 
     <span class="icon-container">
-        <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="/cart" class="cart-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-badge" *ngIf="(cartCount$ | async) as count">{{ count }}</span>
+        </a>
         <a (click)="navigateToUserArea()" style="cursor: pointer;"><i class="fa-solid fa-user"></i></a>
     </span>
 </header>

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-orders',
@@ -8,22 +9,34 @@ import { CommonModule } from '@angular/common';
   templateUrl: './orders.html',
   styleUrl: './orders.css',
 })
-export class Orders {
-  orders = [
-    { id: '#12345', value: 'R$ 450,00', status: 'Entregue', date: '20/11/2024' },
-    { id: '#12346', value: 'R$ 299,90', status: 'Enviado', date: '22/11/2024' },
-    { id: '#12347', value: 'R$ 899,00', status: 'Pagamento Aprovado', date: '24/11/2024' },
-    { id: '#12348', value: 'R$ 150,00', status: 'Em Análise', date: '24/11/2024' },
-    { id: '#12349', value: 'R$ 1.200,00', status: 'Cancelado', date: '15/11/2024' },
-  ];
+export class Orders implements OnInit {
+  orders: any[] = [];
+
+  constructor(
+    private orderService: OrderService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.orderService.getUserOrders().subscribe({
+        next: (data) => {
+          this.orders = data;
+        },
+        error: (err) => {
+          console.error('Erro ao buscar pedidos', err);
+        }
+      });
+    }
+  }
 
   getStatusClass(status: string): string {
     switch (status) {
-      case 'Entregue': return 'status-delivered';
-      case 'Enviado': return 'status-shipped';
-      case 'Pagamento Aprovado': return 'status-approved';
-      case 'Em Análise': return 'status-analysis';
-      case 'Cancelado': return 'status-cancelled';
+      case 'DELIVERED': return 'status-delivered';
+      case 'SHIPPED': return 'status-shipped';
+      case 'PAID': return 'status-approved';
+      case 'PENDING': return 'status-analysis';
+      case 'CANCELLED': return 'status-cancelled';
       default: return '';
     }
   }

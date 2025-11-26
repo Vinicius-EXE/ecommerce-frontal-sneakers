@@ -145,12 +145,44 @@
 
     </div>
 
-    <div class="divider"></div>
+    <div class="order-summary">
+      <h3>Resumo do Pedido</h3>
 
-    <div class="summary-total">
-      <span>Total</span>
-      <span>R$ {{ (cartTotal + freight) | number:'1.2-2' }}</span>
+      <div class="cart-items-list" *ngIf="cartItems.length > 0">
+        <div class="product-mini" *ngFor="let item of cartItems">
+          <div class="img-placeholder">
+            <img [src]="item.product.images ? item.product.images.split(',')[0] : 'assets/placeholder.png'"
+              alt="Product" class="product-mini-img">
+          </div>
+          <div>
+            <h4>{{ item.product.name }}</h4>
+            <p>Tam: {{ item.size }}</p>
+            <p>Qtd: {{ item.quantity }}</p>
+            <p>{{ item.product.price | currency:'BRL' }}</p>
+          </div>
+          <button class="remove-btn" (click)="removeItem(item.product.id)">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="summary-line">
+        <span>Subtotal</span>
+        <span>{{ cartTotal | currency:'BRL' }}</span>
+      </div>
+      <div class="summary-line">
+        <span>Frete</span>
+        <span *ngIf="freight === 0" class="free">Grátis</span>
+        <span *ngIf="freight > 0">{{ freight | currency:'BRL' }}</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="summary-total">
+        <span>Total</span>
+        <span>{{ (cartTotal + freight) | currency:'BRL' }}</span>
+      </div>
     </div>
   </div>
-
-</div>

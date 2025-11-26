@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OrderService } from '../../services/order.service';
 
@@ -23,10 +23,15 @@ export class ManageOrders implements OnInit {
     'CANCELADO'
   ];
 
-  constructor(private orderService: OrderService) { }
+  constructor(
+    private orderService: OrderService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
 
   ngOnInit() {
-    this.loadOrders();
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadOrders();
+    }
   }
 
   loadOrders() {
