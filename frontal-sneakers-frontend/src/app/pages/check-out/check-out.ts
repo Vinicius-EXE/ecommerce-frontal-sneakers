@@ -1,97 +1,113 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Importante para *ngIf e Pipes
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-// --- INTERFACES (Definições de Tipos) ---
-export interface CartItem {
-  name: string;
-  price: number;
-  image: string;
-}
-
-export interface Address {
-  id: number;
-  street: string;
-  number: string;
-  zipCode: string;
-  city: string;
-}
-
-export interface PaymentData {
-  method: 'pix' | 'credit_card' | 'boleto';
-  cardName?: string;
-  cardNumber?: string;
-}
-
-// --- COMPONENTE ---
 @Component({
   selector: 'app-checkout',
-  standalone: true, // Define que é um componente independente
-  imports: [CommonModule], // Necessário para funcionar o *ngIf e o | number no HTML
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './check-out.html',
   styleUrls: ['./check-out.css']
 })
-export class CheckoutComponent {
-  // Controle de Passos (1: Endereço, 2: Pagamento, 3: Revisão)
+export class CheckoutComponent implements OnInit {
   currentStep: number = 1;
-
-  // Controle de Estado do Endereço
-  showAddressForm: boolean = false; 
+  checkoutForm: FormGroup;
   
-  savedAddresses: Address[] = [
-    { id: 1, street: 'Rua das Flores', number: '123', zipCode: '01001-000', city: 'São Paulo' }
-  ];
-  
-  // Inicializa o endereço selecionado com o primeiro da lista, se existir
-  selectedAddress: Address | null = this.savedAddresses.length > 0 ? this.savedAddresses[0] : null;
+  // Dados simulados do carrinho
+  cartTotal: number = 899.90; // Preço do Asics da imagem
+  freight: number = 0; // Frete grátis geralmente agrada mais
 
-  // Controle de Pagamento
-  selectedPaymentMethod: 'pix' | 'credit_card' | 'boleto' = 'credit_card';
+  constructor(private fb: FormBuilder) {
+    this.checkoutForm = this.fb.group({
+      address: this.fb.group({
+        cep: ['', [Validators.required, Validators.minLength(9)]],
+        street: ['', Validators.required],
+        number: ['', Validators.required],
+        complement: [''],
+        city: ['', Validators.required],
+        state: ['', Validators.required],
+        type: ['casa']
+      }),
+      payment: this.fb.group({
+        method: ['credit_card', Validators.required],
+        cardNumber: [''],
+        cardName: [''],
+        cardExpiry: [''],
+        cardCvv: [''],
+        cpf: ['']
+      })
+    });
+  }
 
-  // Resumo do Carrinho (Estático)
-  cartTotal: number = 599.90;
-  freight: number = 20.00;
-
-  constructor() {
-    // Se não tiver endereço salvo, força a tela de cadastro
-    if (this.savedAddresses.length === 0) {
-      this.showAddressForm = true;
-    }
+  ngOnInit(): void {
+    // Reage a mudanças no método de pagamento para validar ou não o cartão
+    this.checkoutForm.get('payment.method')?.valueChanges.subscribe(method => {
+      const creditControls = ['cardNumber', 'cardName', 'cardExpiry', 'cardCvv', 'cpf'];
+      if (method === 'credit_card') {
+        creditControls.forEach(c => this.checkoutForm.get(`payment.${c}`)?.setValidators([Validators.required]));
+      } else {
+        creditControls.forEach(c => this.checkoutForm.get(`payment.${c}`)?.clearValidators());
+      }
+      creditControls.forEach(c => this.checkoutForm.get(`payment.${c}`)?.updateValueAndValidity());
+    });
   }
 
   // --- Navegação ---
-  goToStep(step: number) {
-    this.currentStep = step;
-  }
-
   nextStep() {
-    if (this.currentStep < 3) this.currentStep++;
+    if (this.currentStep === 1 && this.checkoutForm.get('address')?.valid) {
+      this.currentStep++;
+    } else if (this.currentStep === 2 && this.checkoutForm.get('payment')?.valid) {
+      this.currentStep++;
+    } else {
+      this.checkoutForm.markAllAsTouched(); // Mostra erros se houver
+      if(this.currentStep === 1) alert("Preencha o endereço corretamente.");
+    }
   }
 
-  // --- Ações de Endereço ---
-  toggleAddressForm() {
-    this.showAddressForm = !this.showAddressForm;
+  prevStep() {
+    if (this.currentStep > 1) this.currentStep--;
   }
 
-  saveAddress() {
-    // Mock de salvamento
-    const newAddress: Address = { 
-        id: 2, 
-        street: 'Nova Rua Exemplo', 
-        number: '99', 
-        zipCode: '00000-000', 
-        city: 'Exemplo' 
-    };
-    
-    // Adiciona na lista e seleciona ele
-    this.savedAddresses.push(newAddress);
-    this.selectedAddress = newAddress;
-    
-    // Fecha o formulário
-    this.showAddressForm = false;
-  }
-
-  // --- Ações Finais ---
   finishOrder() {
-    alert('Compra finalizada com sucesso! Integração com Spring Boot pendente.');
+    console.log('Dados do Pedido:', this.checkoutForm.value);
+    alert('Pedido realizado com sucesso! Integração com API pronta.');
+  }
+
+  // --- Formatadores de Input (Máscaras) ---
+  
+  // Apenas números e formatação de CEP (00000-000)
+  formatCEP(event: any) {
+    let value = event.target.value.replace(/\D/g, '');
+    if (value.length > 5) value = value.replace(/^(\d{5})(\d)/, '$1-$2');
+    this.checkoutForm.get('address.cep')?.setValue(value);
+  }
+
+  // Formatação de Cartão (0000 0000 0000 0000)
+  formatCardNumber(event: any) {
+    let value = event.target.value.replace(/\D/g, '');
+    value = value.replace(/(\d{4})/g, '$1 ').trim();
+    this.checkoutForm.get('payment.cardNumber')?.setValue(value.substring(0, 19));
+  }
+
+  // Formatação de Validade (MM/AA)
+  formatExpiry(event: any) {
+    let value = event.target.value.replace(/\D/g, '');
+    if (value.length >= 2) value = value.replace(/^(\d{2})(\d)/, '$1/$2');
+    this.checkoutForm.get('payment.cardExpiry')?.setValue(value.substring(0, 5));
+  }
+
+  // Formatação de CPF (000.000.000-00)
+  formatCPF(event: any) {
+    let value = event.target.value.replace(/\D/g, '');
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    this.checkoutForm.get('payment.cpf')?.setValue(value.substring(0, 14));
+  }
+  
+  // Apenas números genérico
+  onlyNumbers(event: any, controlName: string, groupName: string) {
+    const value = event.target.value.replace(/\D/g, '');
+    this.checkoutForm.get(`${groupName}.${controlName}`)?.setValue(value);
   }
 }

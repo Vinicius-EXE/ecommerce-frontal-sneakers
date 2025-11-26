@@ -1,174 +1,169 @@
-<div class="checkout-container">
+<div class="checkout-wrapper">
   
-  <div class="stepper">
-    <div class="step" [class.active]="currentStep >= 1">1</div>
-    <div class="line"></div>
-    <div class="step" [class.active]="currentStep >= 2">2</div>
-    <div class="line"></div>
-    <div class="step" [class.active]="currentStep >= 3">3</div>
+  <div class="stepper-container">
+    <div class="step" [class.active]="currentStep >= 1" [class.finished]="currentStep > 1">
+      <span>1</span> <p>Entrega</p>
+    </div>
+    <div class="line" [class.filled]="currentStep > 1"></div>
+    <div class="step" [class.active]="currentStep >= 2" [class.finished]="currentStep > 2">
+      <span>2</span> <p>Pagamento</p>
+    </div>
+    <div class="line" [class.filled]="currentStep > 2"></div>
+    <div class="step" [class.active]="currentStep >= 3">
+      <span>3</span> <p>Revisão</p>
+    </div>
   </div>
 
-  <div class="content-wrapper">
+  <div class="main-content">
     
-    <div class="main-column">
+    <div class="form-section" [formGroup]="checkoutForm">
 
-      <div *ngIf="currentStep === 1">
-        <h2>Confira a forma de entrega</h2>
+      <div *ngIf="currentStep === 1" formGroupName="address" class="animate-fade">
+        <h2 class="section-title">Onde vamos entregar?</h2>
+        
+        <div class="input-group">
+          <label>CEP</label>
+          <input type="text" formControlName="cep" placeholder="00000-000" (input)="formatCEP($event)" maxlength="9">
+        </div>
 
-        <div *ngIf="!showAddressForm && savedAddresses.length > 0" class="card-selection">
-          <div class="card-option selected">
-            <div class="icon-placeholder map-icon"></div>
-            <div class="details">
-              <strong>Endereço Cadastrado</strong>
-              <p>{{ selectedAddress?.street }}, {{ selectedAddress?.number }}</p>
+        <div class="row">
+          <div class="input-group grow">
+            <label>Rua / Avenida</label>
+            <input type="text" formControlName="street">
+          </div>
+          <div class="input-group small">
+            <label>Número</label>
+            <input type="text" formControlName="number" (input)="onlyNumbers($event, 'number', 'address')">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-group grow">
+            <label>Complemento</label>
+            <input type="text" formControlName="complement">
+          </div>
+          <div class="input-group grow">
+            <label>Cidade</label>
+            <input type="text" formControlName="city">
+          </div>
+          <div class="input-group small">
+            <label>UF</label>
+            <input type="text" formControlName="state" maxlength="2" style="text-transform: uppercase;">
+          </div>
+        </div>
+
+        <button class="btn-black full-width mt-4" (click)="nextStep()">Ir para Pagamento</button>
+      </div>
+
+      <div *ngIf="currentStep === 2" formGroupName="payment" class="animate-fade">
+        <h2 class="section-title">Como você quer pagar?</h2>
+
+        <div class="payment-options">
+          <label class="payment-card" [class.selected]="checkoutForm.get('payment.method')?.value === 'pix'">
+            <input type="radio" formControlName="method" value="pix">
+            <span class="icon">💠</span>
+            <div class="info">
+              <strong>PIX</strong>
+              <small>Aprovação imediata - 5% OFF</small>
+            </div>
+          </label>
+
+          <label class="payment-card" [class.selected]="checkoutForm.get('payment.method')?.value === 'credit_card'">
+            <input type="radio" formControlName="method" value="credit_card">
+            <span class="icon">💳</span>
+            <div class="info">
+              <strong>Cartão de Crédito</strong>
+              <small>Até 12x sem juros</small>
+            </div>
+          </label>
+        </div>
+
+        <div class="credit-card-form" *ngIf="checkoutForm.get('payment.method')?.value === 'credit_card'">
+          <div class="input-group">
+            <label>Número do Cartão</label>
+            <input type="text" formControlName="cardNumber" placeholder="0000 0000 0000 0000" (input)="formatCardNumber($event)" maxlength="19">
+          </div>
+
+          <div class="input-group">
+            <label>Nome impresso no cartão</label>
+            <input type="text" formControlName="cardName" placeholder="COMO NO CARTÃO">
+          </div>
+
+          <div class="row">
+            <div class="input-group">
+              <label>Validade</label>
+              <input type="text" formControlName="cardExpiry" placeholder="MM/AA" (input)="formatExpiry($event)" maxlength="5">
+            </div>
+            <div class="input-group">
+              <label>CVV</label>
+              <input type="text" formControlName="cardCvv" placeholder="123" maxlength="4" (input)="onlyNumbers($event, 'cardCvv', 'payment')">
             </div>
           </div>
-          <button class="btn-text" (click)="toggleAddressForm()">+ Adicionar novo endereço</button>
+          
+          <div class="input-group">
+            <label>CPF do Titular</label>
+            <input type="text" formControlName="cpf" placeholder="000.000.000-00" (input)="formatCPF($event)" maxlength="14">
+          </div>
         </div>
 
-        <div *ngIf="showAddressForm" class="form-box">
-            <h3>Adicionar endereço</h3>
-            <div class="form-group">
-                <label>CEP</label>
-                <input type="text" placeholder="00000-000">
-            </div>
-            <div class="form-row">
-                <div class="form-group grow">
-                    <label>Rua / Avenida</label>
-                    <input type="text">
-                </div>
-                <div class="form-group small">
-                    <label>Número</label>
-                    <input type="text">
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Complemento (opcional)</label>
-                <input type="text">
-            </div>
-            <div class="radio-group">
-                <label><input type="radio" name="type" checked> Casa</label>
-                <label><input type="radio" name="type"> Trabalho</label>
-            </div>
-
-            <h4>Dados de contato</h4>
-            <div class="form-group">
-                <label>Nome e Sobrenome</label>
-                <input type="text">
-            </div>
-            <div class="form-group">
-                <label>Telefone de contato</label>
-                <input type="text">
-            </div>
-
-            <div class="actions">
-                <button class="btn-secondary" (click)="toggleAddressForm()">Cancelar</button>
-                <button class="btn-primary" (click)="saveAddress()">Salvar e Continuar</button>
-            </div>
+        <div class="buttons-row mt-4">
+          <button class="btn-outline" (click)="prevStep()">Voltar</button>
+          <button class="btn-black" (click)="nextStep()">Revisar Pedido</button>
         </div>
+      </div>
+
+      <div *ngIf="currentStep === 3" class="animate-fade">
+        <h2 class="section-title">Tudo certo?</h2>
         
-        <button *ngIf="!showAddressForm" class="btn-primary mt-20" (click)="nextStep()">Continuar para Pagamento</button>
-      </div>
-
-
-      <div *ngIf="currentStep === 2">
-        <h2>Escolha a forma de pagamento</h2>
-
-        <div class="payment-card" [class.selected]="selectedPaymentMethod === 'pix'" (click)="selectedPaymentMethod = 'pix'">
-            <div class="radio-header">
-                <input type="radio" [checked]="selectedPaymentMethod === 'pix'">
-                <strong>Pix</strong>
-            </div>
-            <p class="sub-text">Aprovação imediata. QR Code gerado na finalização.</p>
+        <div class="review-card">
+          <div class="review-row">
+            <span class="label">Entregar em:</span>
+            <span class="value">
+              {{ checkoutForm.get('address.street')?.value }}, 
+              {{ checkoutForm.get('address.number')?.value }} - 
+              {{ checkoutForm.get('address.city')?.value }}
+            </span>
+          </div>
+          <div class="review-row">
+            <span class="label">Pagamento:</span>
+            <span class="value uppercase">{{ checkoutForm.get('payment.method')?.value }}</span>
+          </div>
         </div>
 
-        <div class="payment-card" [class.selected]="selectedPaymentMethod === 'credit_card'" (click)="selectedPaymentMethod = 'credit_card'">
-            <div class="radio-header">
-                <input type="radio" [checked]="selectedPaymentMethod === 'credit_card'">
-                <strong>Cartão de Crédito</strong>
-            </div>
-            
-            <div class="card-form" *ngIf="selectedPaymentMethod === 'credit_card'">
-                <div class="form-group">
-                    <label>Número do cartão</label>
-                    <input type="text" placeholder="0000 0000 0000 0000">
-                </div>
-                <div class="form-group">
-                    <label>Nome do titular</label>
-                    <input type="text" placeholder="Conforme no cartão">
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Vencimento</label>
-                        <input type="text" placeholder="MM/AA">
-                    </div>
-                    <div class="form-group">
-                        <label>Cód. segurança</label>
-                        <input type="text" placeholder="123">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>CPF do titular</label>
-                    <input type="text" placeholder="000.000.000-00">
-                </div>
-            </div>
-        </div>
-
-        <div class="payment-card" [class.selected]="selectedPaymentMethod === 'boleto'" (click)="selectedPaymentMethod = 'boleto'">
-            <div class="radio-header">
-                <input type="radio" [checked]="selectedPaymentMethod === 'boleto'">
-                <strong>Boleto</strong>
-            </div>
-            <p class="sub-text">Aprovação em 1 ou 2 dias úteis</p>
-        </div>
-
-        <button class="btn-primary mt-20" (click)="nextStep()">Continuar para Revisão</button>
-      </div>
-
-
-      <div *ngIf="currentStep === 3">
-        <h2>Revise e confirme sua compra</h2>
-
-        <div class="review-block">
-            <div class="review-item">
-                <div class="icon-placeholder">💳</div>
-                <div>
-                    <strong>Forma de pagamento</strong>
-                    <p>{{ selectedPaymentMethod | uppercase }}</p>
-                </div>
-            </div>
-            
-            <div class="review-item">
-                <div class="icon-placeholder">📍</div>
-                <div>
-                    <strong>Endereço de entrega</strong>
-                    <p>{{ selectedAddress?.street }}, {{ selectedAddress?.number }} - {{ selectedAddress?.city }}</p>
-                </div>
-            </div>
+        <div class="buttons-row mt-4">
+          <button class="btn-outline" (click)="prevStep()">Voltar</button>
+          <button class="btn-confirm full-width" (click)="finishOrder()">FINALIZAR COMPRA</button>
         </div>
       </div>
 
-    </div> <div class="sidebar">
-      <div class="summary-box">
-        <h3>Resumo da compra</h3>
-        <hr>
-        <div class="summary-row">
-          <span>Produto (Tênis XYZ)</span>
-          <span>R$ {{ cartTotal | number:'1.2-2' }}</span>
-        </div>
-        <div class="summary-row">
-          <span>Frete</span>
-          <span>R$ {{ freight | number:'1.2-2' }}</span>
-        </div>
-        <hr>
-        <div class="summary-row total">
-            <span>Total</span>
-            <span>R$ {{ (cartTotal + freight) | number:'1.2-2' }}</span>
-        </div>
+    </div>
 
-        <button *ngIf="currentStep === 3" class="btn-primary full-width" (click)="finishOrder()">
-            Comprar Agora
-        </button>
+    <div class="order-summary">
+      <h3>Resumo do Pedido</h3>
+      <div class="product-mini">
+        <div class="img-placeholder">👟</div> <div>
+          <h4>Asics Gel-NYC Gray</h4>
+          <p>Tamanho: 41</p>
+        </div>
+      </div>
+      
+      <div class="divider"></div>
+
+      <div class="summary-line">
+        <span>Subtotal</span>
+        <span>R$ {{ cartTotal | number:'1.2-2' }}</span>
+      </div>
+      <div class="summary-line">
+        <span>Frete</span>
+        <span *ngIf="freight === 0" class="free">Grátis</span>
+        <span *ngIf="freight > 0">R$ {{ freight | number:'1.2-2' }}</span>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="summary-total">
+        <span>Total</span>
+        <span>R$ {{ (cartTotal + freight) | number:'1.2-2' }}</span>
       </div>
     </div>
 
