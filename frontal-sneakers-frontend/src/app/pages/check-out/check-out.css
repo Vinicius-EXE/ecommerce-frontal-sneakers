@@ -1,3 +1,7 @@
+/* No topo do arquivo checkout.component.css */
+* {
+  box-sizing: border-box;
+}
 /* Fontes sugeridas: Montserrat ou Roboto (Importe no index.html se puder) */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
 
@@ -79,58 +83,54 @@
 /* --- LAYOUT DUAS COLUNAS --- */
 .main-content {
   display: grid;
-  grid-template-columns: 1.5fr 1fr; /* Esquerda maior, direita menor */
+  /* Mudei para minmax para garantir que a direita tenha um tamanho fixo mínimo */
+  grid-template-columns: 1fr 350px; 
   gap: 40px;
+  align-items: start; /* Impede que a coluna estique desnecessariamente */
 }
 
-@media (max-width: 768px) {
-  .main-content { grid-template-columns: 1fr; }
+/* --- RESPONSIVIDADE (Importante para telas menores) --- */
+/* Se a tela for menor que 900px, joga o resumo para baixo do formulário */
+@media (max-width: 900px) {
+  .main-content {
+    grid-template-columns: 1fr; /* Vira uma coluna só */
+  }
+  
+  .order-summary {
+    order: -1; /* Opcional: Se quiser que o resumo apareça ANTES do form no celular, use -1. Se quiser depois, remova essa linha */
+    margin-bottom: 30px;
+  }
 }
 
-/* --- FORM SECTIONS --- */
-.section-title {
-  font-size: 1.5rem;
-  font-weight: 800;
-  margin-bottom: 25px;
-  text-transform: uppercase;
-  letter-spacing: -0.5px;
+/* --- INPUTS E LINHAS --- */
+.row {
+  display: flex;
+  gap: 15px;
+  width: 100%; /* Garante que a linha ocupe 100% da coluna pai */
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
-}
-
-.input-group label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #555;
+  min-width: 0; /* Truque de CSS para evitar estouro em Flexbox */
 }
 
 input[type="text"], select {
+  width: 100%; /* Força o input a respeitar o pai */
+  max-width: 100%; /* Trava de segurança extra */
   padding: 14px 16px;
   border: 1px solid #ddd;
   border-radius: 6px;
   background: #fff;
   font-size: 1rem;
-  transition: border-color 0.2s;
   outline: none;
+  transition: all 0.2s;
 }
 
-input[type="text"]:focus {
-  border-color: #000;
-  box-shadow: 0 0 0 2px rgba(0,0,0,0.05);
-}
-
-.row {
-  display: flex;
-  gap: 15px;
-}
-
+/* Mantém as proporções que fizemos antes */
 .grow { flex: 1; }
-.small { width: 100px; }
+.small { width: 120px; flex-shrink: 0; } /* Aumentei um pouco e impedi de encolher demais */
 
 /* --- PAYMENT CARDS --- */
 .payment-options {
