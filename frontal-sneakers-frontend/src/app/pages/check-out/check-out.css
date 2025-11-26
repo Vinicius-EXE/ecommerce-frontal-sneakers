@@ -2,14 +2,13 @@
 * {
   box-sizing: border-box;
 }
-/* Fontes sugeridas: Montserrat ou Roboto (Importe no index.html se puder) */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
 
 :host {
   display: block;
   font-family: 'Montserrat', sans-serif;
   color: #1a1a1a;
-  background-color: #f5f5f5; /* Fundo cinza bem claro para destacar os cards brancos */
+  background-color: #f5f5f5;
+  /* Fundo cinza bem claro para destacar os cards brancos */
   min-height: 100vh;
   padding: 40px 20px;
 }
@@ -62,7 +61,9 @@
   transform: scale(1.1);
 }
 
-.step.active p { color: #000; }
+.step.active p {
+  color: #000;
+}
 
 .step.finished span {
   background: #000;
@@ -75,29 +76,35 @@
   max-width: 100px;
   height: 2px;
   background: #e0e0e0;
-  margin: -25px 10px 0; /* Ajuste para alinhar com a bolinha */
+  margin: -25px 10px 0;
+  /* Ajuste para alinhar com a bolinha */
 }
 
-.line.filled { background: #000; }
+.line.filled {
+  background: #000;
+}
 
 /* --- LAYOUT DUAS COLUNAS --- */
 .main-content {
   display: grid;
   /* Mudei para minmax para garantir que a direita tenha um tamanho fixo mínimo */
-  grid-template-columns: 1fr 350px; 
+  grid-template-columns: 1fr 350px;
   gap: 40px;
-  align-items: start; /* Impede que a coluna estique desnecessariamente */
+  align-items: start;
+  /* Impede que a coluna estique desnecessariamente */
 }
 
 /* --- RESPONSIVIDADE (Importante para telas menores) --- */
 /* Se a tela for menor que 900px, joga o resumo para baixo do formulário */
 @media (max-width: 900px) {
   .main-content {
-    grid-template-columns: 1fr; /* Vira uma coluna só */
+    grid-template-columns: 1fr;
+    /* Vira uma coluna só */
   }
-  
+
   .order-summary {
-    order: -1; /* Opcional: Se quiser que o resumo apareça ANTES do form no celular, use -1. Se quiser depois, remova essa linha */
+    order: -1;
+    /* Opcional: Se quiser que o resumo apareça ANTES do form no celular, use -1. Se quiser depois, remova essa linha */
     margin-bottom: 30px;
   }
 }
@@ -106,19 +113,24 @@
 .row {
   display: flex;
   gap: 15px;
-  width: 100%; /* Garante que a linha ocupe 100% da coluna pai */
+  width: 100%;
+  /* Garante que a linha ocupe 100% da coluna pai */
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
-  min-width: 0; /* Truque de CSS para evitar estouro em Flexbox */
+  min-width: 0;
+  /* Truque de CSS para evitar estouro em Flexbox */
 }
 
-input[type="text"], select {
-  width: 100%; /* Força o input a respeitar o pai */
-  max-width: 100%; /* Trava de segurança extra */
+input[type="text"],
+select {
+  width: 100%;
+  /* Força o input a respeitar o pai */
+  max-width: 100%;
+  /* Trava de segurança extra */
   padding: 14px 16px;
   border: 1px solid #ddd;
   border-radius: 6px;
@@ -129,8 +141,16 @@ input[type="text"], select {
 }
 
 /* Mantém as proporções que fizemos antes */
-.grow { flex: 1; }
-.small { width: 120px; flex-shrink: 0; } /* Aumentei um pouco e impedi de encolher demais */
+.grow {
+  flex: 1;
+}
+
+.small {
+  width: 120px;
+  flex-shrink: 0;
+}
+
+/* Aumentei um pouco e impedi de encolher demais */
 
 /* --- PAYMENT CARDS --- */
 .payment-options {
@@ -152,20 +172,40 @@ input[type="text"], select {
   position: relative;
 }
 
-.payment-card input { display: none; } /* Esconde o radio button nativo */
+.payment-card input {
+  display: none;
+}
 
-.payment-card:hover { border-color: #999; }
+/* Esconde o radio button nativo */
+
+.payment-card:hover {
+  border-color: #999;
+}
 
 .payment-card.selected {
   border-color: #000;
   background-color: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.payment-card .icon { font-size: 1.5rem; margin-right: 15px; }
-.payment-card .info { display: flex; flex-direction: column; }
-.payment-card strong { font-size: 0.95rem; }
-.payment-card small { font-size: 0.75rem; color: #777; }
+.payment-card .icon {
+  font-size: 1.5rem;
+  margin-right: 15px;
+}
+
+.payment-card .info {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-card strong {
+  font-size: 0.95rem;
+}
+
+.payment-card small {
+  font-size: 0.75rem;
+  color: #777;
+}
 
 /* --- ORDER SUMMARY (Direita) --- */
 .order-summary {
@@ -173,7 +213,8 @@ input[type="text"], select {
   padding: 30px;
   border-radius: 12px;
   height: fit-content;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Sombra suave premium */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  /* Sombra suave premium */
 }
 
 .order-summary h3 {
@@ -208,7 +249,10 @@ input[type="text"], select {
   color: #555;
 }
 
-.summary-line .free { color: #27ae60; font-weight: bold; }
+.summary-line .free {
+  color: #27ae60;
+  font-weight: bold;
+}
 
 .divider {
   height: 1px;
@@ -231,8 +275,13 @@ input[type="text"], select {
   gap: 15px;
 }
 
-.full-width { width: 100%; }
-.mt-4 { margin-top: 25px; }
+.full-width {
+  width: 100%;
+}
+
+.mt-4 {
+  margin-top: 25px;
+}
 
 button {
   cursor: pointer;
@@ -262,15 +311,21 @@ button {
   color: #555;
 }
 
-.btn-outline:hover { border-color: #000; color: #000; }
+.btn-outline:hover {
+  border-color: #000;
+  color: #000;
+}
 
 .btn-confirm {
-  background: #d32f2f; /* Vermelho do banner 'ULTIMAS OFERTAS' */
+  background: #d32f2f;
+  /* Vermelho do banner 'ULTIMAS OFERTAS' */
   color: #fff;
   border: none;
 }
 
-.btn-confirm:hover { background: #b71c1c; }
+.btn-confirm:hover {
+  background: #b71c1c;
+}
 
 /* Animação suave entre passos */
 .animate-fade {
@@ -278,6 +333,13 @@ button {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -9,12 +9,16 @@
                 <span class="card-holder">{{ card.holderName }}</span>
                 <span class="card-number">**** **** **** {{ card.lastDigits }}</span>
             </div>
-            <input type="radio" [checked]="card.selected" name="selectedCard">
+            <div class="card-actions">
+                <i class="fa-solid fa-pencil" (click)="startEdit(card); $event.stopPropagation()"></i>
+                <i class="fa-solid fa-trash" (click)="confirmDelete(card.id); $event.stopPropagation()"></i>
+                <input type="radio" [checked]="card.selected" name="selectedCard">
+            </div>
         </div>
     </div>
 
     <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" class="payment-form">
-        <h3>Adicionar Novo Cartão</h3>
+        <h3>{{ isEditing ? 'Editar Cartão' : 'Adicionar Novo Cartão' }}</h3>
 
         <div class="form-group">
             <label for="cardNumber">Número do cartão</label>
@@ -51,6 +55,21 @@
             <input type="text" id="nickname" formControlName="nickname" placeholder="Ex.: Nubank">
         </div>
 
-        <button type="submit" class="save-btn" [disabled]="!paymentForm.valid">Adicionar Cartão</button>
+        <div class="form-actions">
+            <button type="button" class="cancel-btn" *ngIf="isEditing" (click)="cancelEdit()">Cancelar</button>
+            <button type="submit" class="save-btn" [disabled]="!paymentForm.valid">{{ isEditing ? 'Salvar Alterações' :
+                'Adicionar Cartão' }}</button>
+        </div>
     </form>
+
+    <div class="modal-overlay" *ngIf="showDeleteConfirmation">
+        <div class="modal-content">
+            <h3>Confirmar Exclusão</h3>
+            <p>Tem certeza que deseja excluir este cartão?</p>
+            <div class="modal-actions">
+                <button class="cancel-btn" (click)="cancelDelete()">CANCELAR</button>
+                <button class="confirm-btn" (click)="deleteCard()">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
 </main>

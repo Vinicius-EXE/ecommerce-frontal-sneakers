@@ -8,6 +8,7 @@ import { BannerNike } from '../../components/banner-nike/banner-nike';
 import { Header } from '../../components/header/header';
 @Component({
   selector: 'app-home-page',
+  standalone: true,
   imports: [ Header, BannerHome, BrandsSlider, ProductsSlider, BannerNike, BannerVans, Rodape ],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',

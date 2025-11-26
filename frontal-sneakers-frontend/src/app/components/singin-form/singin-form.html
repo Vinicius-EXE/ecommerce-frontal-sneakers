@@ -5,19 +5,19 @@
         <p>Bora garantir aquele Dorp antes<br>que acabe?</p>
     </span>
 
-    <form>
-        <input type="text" placeholder="Email">
+    <form (ngSubmit)="login()">
+        <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required>
         <div class="password-container">
-            <input type="password" placeholder="Senha">
-            <button class="hidden-password">
-                <i class="fa-solid fa-eye"></i>
-                <i i class="fa-solid fa-eye-slash hidden"></i>
+            <input [type]="showPassword ? 'text' : 'password'" placeholder="Senha" [(ngModel)]="password"
+                name="password" required>
+            <button type="button" class="hidden-password" (click)="togglePasswordVisibility()">
+                <i class="fa-solid" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
             </button>
         </div>
 
         <a href="#" class="forgot-password">Esqueceu a senha?</a>
 
-        <button class="singin-action-btn">Entrar</button>
+        <button type="submit" class="singin-action-btn">Entrar</button>
         <a href="/auth/singup" class="go-to-singup-btn">Não tem conta? Clique aqui!</a>
     </form>
 </div>

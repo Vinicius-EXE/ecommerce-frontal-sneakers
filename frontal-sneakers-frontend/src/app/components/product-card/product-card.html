@@ -1,0 +1,17 @@
+<div class="card-container" *ngIf="product">
+    <figure class="produto-image">
+        <img [src]="product.images ? product.images.split(',')[0] : 'assets/placeholder.png'"
+            [alt]="'Imagem do Produto - ' + product.name">
+    </figure>
+
+    <div class="text-content">
+        <span class="marca-produto">{{ product.brand }}</span> <br>
+        <span class="nome-produto">{{ product.name }}</span>
+        <span class="produto-preco">{{ product.price | currency:'BRL' }}</span>
+    </div>
+
+    <div class="btns-container">
+        <button class="add-cart-btn">Add to Cart</button>
+        <button class="buy-now-btn" [routerLink]="['/product', product.id]">Buy Now</button>
+    </div>
+</div>

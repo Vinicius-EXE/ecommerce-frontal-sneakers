@@ -14,6 +14,9 @@ import { Orders } from './components/orders/orders';
 import { SecurityArea } from './components/security-area/security-area';
 import { AboutUsComponent } from './pages/about-us/about-us';
 import { CheckoutComponent } from './pages/check-out/check-out';
+import { ManageProducts } from './components/manage-products/manage-products';
+import { ManageOrders } from './components/manage-orders/manage-orders';
+import { ManageUsers } from './components/manage-users/manage-users';
 export const routes: Routes = [
     // Rota LoginPage - '/auth'
     {
@@ -22,50 +25,50 @@ export const routes: Routes = [
         children: [
             {
                 // Se o usuário navegar para '/auth', será redirecionado para '/auth/singin'
-                path: '', 
+                path: '',
                 redirectTo: 'singin',
                 pathMatch: 'full'
             },
             {
                 // Rota SinginForm - '/auth/singin'
                 path: 'singin',
-                component: SinginForm 
+                component: SinginForm
             },
             {
                 // Rota SinginForm - '/auth/singup'
                 path: 'singup',
-                component: SingupForm 
+                component: SingupForm
             }
         ]
     },
 
     // Rota HomePage '/home'
     {
-        path: 'home', 
+        path: 'home',
         component: HomePage
     },
 
     // Rota UserPage '/user'
     {
-        path: 'user', 
+        path: 'user',
         component: UserPage
     },
 
     // Rota CartPage '/cart'
     {
-        path: 'cart', 
+        path: 'cart',
         component: CheckoutComponent
     },
 
     // Rota CatalogPage '/products'
     {
-        path: 'products', 
+        path: 'products',
         component: CatalogPage
     },
 
-    // Rota ProductPage '/product'
+    // Rota ProductPage '/product/:id'
     {
-        path: 'product', 
+        path: 'product/:id',
         component: ProductPage
     },
 
@@ -77,40 +80,55 @@ export const routes: Routes = [
             {
                 path: 'personal-info',
                 component: PersonalInfo
-            }, 
+            },
 
             {
                 path: 'cards',
-                component: PaymentMethods 
+                component: PaymentMethods
             },
 
             {
                 path: 'addresses',
-                component: Addresses 
+                component: Addresses
             },
 
             {
                 path: 'orders',
-                component: Orders 
+                component: Orders
             },
 
             {
                 path: 'security',
                 component: SecurityArea
+            },
+
+            {
+                path: 'manage-products',
+                component: ManageProducts
+            },
+
+            {
+                path: 'manage-orders',
+                component: ManageOrders
+            },
+
+            {
+                path: 'manage-users',
+                component: ManageUsers
             }
         ]
     },
-    
+
     // Rota AboutUsPage '/about-us'
     {
-        path: 'about-us', 
+        path: 'about-us',
         component: AboutUsComponent
     },
 
     // Rota Padrão do Site '/home'
-    { 
-        path: '', 
-        redirectTo: 'home', 
-        pathMatch: 'full' 
+    {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
     }
 ];

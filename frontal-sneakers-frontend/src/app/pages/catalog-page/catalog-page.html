@@ -7,16 +7,18 @@
                 <span class="catalog-title">Tênis</span>
                 <span class="sort-options">
                     <p>Filtre por:</p>
-                    <i class="fa-solid fa-arrow-down-wide-short"></i>
+                    <select (change)="onSortChange($event)" class="sort-select">
+                        <option *ngFor="let option of sortOptions" [value]="option.value">{{ option.label }}</option>
+                    </select>
                 </span>
             </header>
 
             <div class="product-grid">
-               <app-card-produto></app-card-produto>
-               <app-card-produto></app-card-produto>
-               <app-card-produto></app-card-produto>
-               <app-card-produto></app-card-produto>
-               <app-card-produto></app-card-produto>
+                <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
+            </div>
+
+            <div class="load-more-container" *ngIf="hasMore">
+                <button (click)="loadMore()" class="load-more-btn">Mostrar Mais</button>
             </div>
         </section>
     </main>

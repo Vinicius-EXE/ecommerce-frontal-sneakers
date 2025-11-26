@@ -1,31 +1,49 @@
 <div class="sidebar" [class.collapsed]="isCollapsed">
     <div class="logo-container">
-        <img *ngIf="!isCollapsed" src="assets/logo-nome-frontal-sneakers-sfundo.svg" alt="Frontal Sneakers Logo"
-            class="logo-expanded">
-        <img *ngIf="isCollapsed" src="frontal-sneakers-favicon.svg" alt="Frontal Sneakers Icon" class="logo-collapsed">
+        <img class="logo-expanded" *ngIf="!isCollapsed" src="assets/logo-nome-frontal-sneakers-sfundo.svg"
+            alt="Frontal Sneakers Logo">
+        <img class="logo-collapsed" *ngIf="isCollapsed" src="frontal-sneakers-favicon.svg" alt="Frontal Sneakers Logo">
     </div>
 
-    <nav class="menu-container">
-        <ul class="menu-list">
-            <li *ngFor="let item of menuItems" class="menu-item">
-                <a href="{{ item.href }}" class="menu-link">
+    <ul class="menu-list">
+        <li *ngFor="let item of menuItems">
+            <!-- Item sem filhos -->
+            <a *ngIf="!item.children" [routerLink]="item.href" routerLinkActive="active" class="menu-link">
+                <span class="material-icons icon">{{ item.icon }}</span>
+                <span class="label" *ngIf="!isCollapsed">{{ item.label }}</span>
+            </a>
+
+            <!-- Item com filhos (ADM) -->
+            <div *ngIf="item.children">
+                <a (click)="item.action ? item.action() : null" class="menu-link" [class.active]="isAdmExpanded">
                     <span class="material-icons icon">{{ item.icon }}</span>
                     <span class="label" *ngIf="!isCollapsed">{{ item.label }}</span>
+                    <span *ngIf="!isCollapsed" class="material-icons arrow">
+                        {{ isAdmExpanded ? 'expand_less' : 'expand_more' }}
+                    </span>
                 </a>
-            </li>
-        </ul>
-    </nav>
 
-    <div class="footer-container">
-        <div class="menu-item logout" (click)="logout()">
-            <a href="#" class="menu-link">
+                <ul class="submenu" *ngIf="isAdmExpanded && !isCollapsed">
+                    <li *ngFor="let subItem of item.children">
+                        <a [routerLink]="subItem.href" routerLinkActive="active" class="menu-link">
+                            <span class="material-icons icon">{{ subItem.icon }}</span>
+                            <span class="label">{{ subItem.label }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <!-- Logout -->
+        <li>
+            <a (click)="logout()" class="menu-link">
                 <span class="material-icons icon">logout</span>
                 <span class="label" *ngIf="!isCollapsed">LogOut</span>
             </a>
-        </div>
+        </li>
+    </ul>
 
-        <div class="toggle-btn" (click)="toggleSidebar()">
-            <span class="material-icons">{{ isCollapsed ? 'chevron_right' : 'chevron_left' }}</span>
-        </div>
+    <div class="toggle-btn" (click)="toggleSidebar()">
+        <span class="material-icons">{{ isCollapsed ? 'chevron_right' : 'chevron_left' }}</span>
     </div>
 </div>

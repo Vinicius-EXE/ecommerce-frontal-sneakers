@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-personal-info',
@@ -15,6 +16,15 @@ export class PersonalInfo {
     cpf: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required]),
   });
+
+  constructor(private userService: UserService) {
+    this.userService.getProfile().subscribe({
+      next: (data) => {
+        this.personalInfoForm.patchValue(data);
+      },
+      error: (err) => console.error('Error fetching profile', err)
+    });
+  }
 
   onCpfInput(event: any) {
     let value = event.target.value.replace(/\D/g, '');
@@ -48,7 +58,10 @@ export class PersonalInfo {
 
   onSubmit() {
     if (this.personalInfoForm.valid) {
-      console.log('Form Submitted', this.personalInfoForm.value);
+      this.userService.updateProfile(this.personalInfoForm.value).subscribe({
+        next: (data) => alert('Informações atualizadas com sucesso!'),
+        error: (err) => alert('Erro ao atualizar informações.')
+      });
     }
   }
 }

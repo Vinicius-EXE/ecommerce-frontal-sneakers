@@ -1,0 +1,43 @@
+<main class="main-container">
+    <h2>Gerenciar Usuários</h2>
+
+    <div class="cards-list">
+        <div *ngFor="let user of users" class="card-item">
+            <div class="card-info">
+                <span class="card-nickname">{{ user.name }} ({{ user.nickname }})</span>
+                <span class="card-holder">{{ user.email }}</span>
+                <span class="card-number" *ngIf="user.isAdmin" style="color: #4CAF50; font-weight: bold;">ADMIN</span>
+                <span class="card-number" *ngIf="!user.isAdmin">USER</span>
+            </div>
+            <div class="card-actions">
+                <button class="action-btn promote-btn" *ngIf="!user.isAdmin" (click)="confirmPromote(user.id)"
+                    title="Promover a Admin">
+                    <i class="fa-solid fa-user-shield"></i>
+                </button>
+                <i class="fa-solid fa-trash delete-icon" (click)="confirmDelete(user.id)" title="Excluir Usuário"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" *ngIf="showPromoteConfirmation">
+        <div class="modal-content">
+            <h3>Confirmar Promoção</h3>
+            <p>Tem certeza que deseja tornar este usuário um ADMIN?</p>
+            <div class="modal-actions">
+                <button class="cancel-btn" (click)="cancelPromote()">CANCELAR</button>
+                <button class="confirm-btn" (click)="promoteUser()">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" *ngIf="showDeleteConfirmation">
+        <div class="modal-content">
+            <h3>Confirmar Exclusão</h3>
+            <p>Tem certeza que deseja excluir este usuário?</p>
+            <div class="modal-actions">
+                <button class="cancel-btn" (click)="cancelDelete()">CANCELAR</button>
+                <button class="confirm-btn" (click)="deleteUser()">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+</main>

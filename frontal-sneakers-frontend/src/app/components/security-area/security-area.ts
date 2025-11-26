@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-security-area',
@@ -19,6 +20,8 @@ export class SecurityArea {
   showConfirmation = false;
   currentPassword = new FormControl('', [Validators.required]);
 
+  constructor(private userService: UserService) { }
+
   onSubmit() {
     if (this.securityForm.valid) {
       if (this.securityForm.value.password !== this.securityForm.value.confirmPassword) {
@@ -31,12 +34,42 @@ export class SecurityArea {
 
   confirmSave() {
     if (this.currentPassword.valid) {
-      console.log('Security Info Updated', this.securityForm.value);
-      this.showConfirmation = false;
-      this.currentPassword.reset();
-      this.securityForm.reset();
-      alert('Informações de segurança atualizadas com sucesso!');
+      const email = this.securityForm.get('email')?.value;
+      const password = this.securityForm.get('password')?.value;
+
+      if (email && email !== this.userService.currentUserValue?.email) {
+        this.userService.updateProfile({ email }).subscribe({
+          next: () => {
+            alert('E-mail atualizado com sucesso!');
+            this.resetForm();
+          },
+          error: (err) => alert('Erro ao atualizar e-mail.')
+        });
+      }
+
+      if (password) {
+        const payload = {
+          currentPassword: this.currentPassword.value,
+          newPassword: password
+        };
+        this.userService.updatePassword(payload).subscribe({
+          next: () => {
+            alert('Senha atualizada com sucesso!');
+            this.resetForm();
+          },
+          error: (err) => {
+            console.error(err);
+            alert('Erro ao atualizar senha. Verifique sua senha atual.');
+          }
+        });
+      }
     }
+  }
+
+  resetForm() {
+    this.showConfirmation = false;
+    this.currentPassword.reset();
+    this.securityForm.reset();
   }
 
   cancelConfirmation() {

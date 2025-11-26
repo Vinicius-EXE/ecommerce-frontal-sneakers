@@ -1,53 +1,65 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardProduto } from '../card-produto/card-produto';
+import { ProductCard } from '../product-card/product-card';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-products-slider',
   standalone: true,
-  imports: [ CommonModule, CardProduto ],
+  imports: [CommonModule, ProductCard],
   templateUrl: './products-slider.html',
   styleUrl: './products-slider.css',
 })
-export class ProductsSlider {
+export class ProductsSlider implements OnInit {
   @Input() title: string = '';
+  @Input() brand: string = ''; // Optional, if needed for other logic, but logic depends on title per user request.
 
-  // Array representing 8 cards. Since CardProduto is static, we just need an array of length 8.
-  cards = new Array(8).fill(0);
-  
+  products: any[] = [];
   currentIndex = 0;
   itemsPerView = 4;
 
+  constructor(private productService: ProductService) { }
+
+  ngOnInit() {
+    this.loadProducts();
+  }
+
+  loadProducts() {
+    if (this.title === 'Produtos Relacionados') {
+      this.productService.getRandomProducts(8).subscribe({
+        next: (data) => this.products = data,
+        error: (err) => console.error(err)
+      });
+    } else {
+      this.productService.getProductsByBrand(this.title).subscribe({
+        next: (data) => this.products = data.slice(0, 8),
+        error: (err) => console.error(err)
+      });
+    }
+  }
+
   get transformStyle() {
-    // We move the track by percentage based on currentIndex
-    // Each item is 100% / itemsPerView wide.
-    // We shift left by currentIndex * (100 / itemsPerView)%
     const percentage = this.currentIndex * (100 / this.itemsPerView);
     return `translateX(-${percentage}%)`;
   }
 
   next() {
-    // Circular logic: if we are at the end, loop back to start
-    // "End" means we can't show 3 more items.
-    // Actually, for a true circular feel without cloning, we usually just stop or loop index.
-    // Let's implement simple loop: if index + itemsPerView >= length, go to 0?
-    // Or just increment and let it slide?
-    // If we want to show 3 items, the max index we can slide to is length - itemsPerView.
-    // If we want "infinite" loop, we need cloning.
-    // Given the request "circular slider", I'll implement a wrap-around index.
-    
-    if (this.currentIndex >= this.cards.length - this.itemsPerView) {
+    if (this.products.length > this.itemsPerView) {
+      if (this.currentIndex >= this.products.length - this.itemsPerView) {
         this.currentIndex = 0;
-    } else {
+      } else {
         this.currentIndex++;
+      }
     }
   }
 
   prev() {
-    if (this.currentIndex === 0) {
-        this.currentIndex = this.cards.length - this.itemsPerView;
-    } else {
+    if (this.products.length > this.itemsPerView) {
+      if (this.currentIndex === 0) {
+        this.currentIndex = this.products.length - this.itemsPerView;
+      } else {
         this.currentIndex--;
+      }
     }
   }
 }

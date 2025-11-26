@@ -1,12 +1,12 @@
-<main class="page-content">
+<main class="page-content" *ngIf="product">
     <app-header></app-header>
     <section class="header-content">
-        <app-product-image-carousel></app-product-image-carousel>
+        <app-product-image-carousel [images]="product.images"></app-product-image-carousel>
         <div class="right-content">
-            <app-buy-product></app-buy-product>
-            <app-product-description></app-product-description>
+            <app-buy-product [product]="product"></app-buy-product>
+            <app-product-description [description]="product.description"></app-product-description>
         </div>
     </section>
-    <app-products-slider title="Produtos Relacionados"></app-products-slider>
+    <app-products-slider title="Produtos Relacionados" [brand]="product.brand"></app-products-slider>
     <app-rodape></app-rodape>
 </main>

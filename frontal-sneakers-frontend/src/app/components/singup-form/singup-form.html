@@ -5,26 +5,27 @@
         <p>Corre que os lançamentos estão<br>voando das prateleiras.</p>
     </div>
 
-    <form>
-        <input type="text" placeholder="Nome Completo">
-        <input type="text" placeholder="Email">
+    <form (ngSubmit)="register()">
+        <input type="text" placeholder="Nome Completo" [(ngModel)]="name" name="name" required>
+        <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required>
         <div class="password-container">
-            <input type="password" placeholder="Senha">
-            <button class="hidden-password">
-                <i class="fa-solid fa-eye"></i>
-                <i class="fa-solid fa-eye-slash hidden"></i>
+            <input [type]="showPassword ? 'text' : 'password'" placeholder="Senha" [(ngModel)]="password"
+                name="password" required>
+            <button type="button" class="hidden-password" (click)="togglePasswordVisibility()">
+                <i class="fa-solid" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
             </button>
         </div>
 
         <div class="password-container">
-            <input type="password" placeholder="Confirme a Senha">
-            <button class="hidden-password">
-                <i class="fa-solid fa-eye"></i>
-                <i class="fa-solid fa-eye-slash hidden"></i>
+            <input [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirme a Senha"
+                [(ngModel)]="confirmPassword" name="confirmPassword" required>
+            <button type="button" class="hidden-password" (click)="toggleConfirmPasswordVisibility()">
+                <i class="fa-solid" [class.fa-eye]="!showConfirmPassword"
+                    [class.fa-eye-slash]="showConfirmPassword"></i>
             </button>
         </div>
 
-        <button class="singup-action-btn">Cadastrar</button>
+        <button type="submit" class="singup-action-btn">Cadastrar</button>
         <a href="/auth/singin" class="go-to-singin-btn">Já tem conta? Clique aqui!</a>
     </form>
 </div>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-addresses',
@@ -23,10 +24,22 @@ export class Addresses {
     nickname: new FormControl('', [Validators.required]),
   });
 
-  savedAddresses = [
-    { nickname: 'Casa', street: 'Rua das Flores', number: '123', neighborhood: 'Centro', cep: '01001-000', selected: true },
-    { nickname: 'Trabalho', street: 'Av. Paulista', number: '1000', neighborhood: 'Bela Vista', cep: '01310-100', selected: false },
-  ];
+  savedAddresses: any[] = [];
+  isEditing = false;
+  editingAddressId: number | null = null;
+  showDeleteConfirmation = false;
+  addressToDeleteId: number | null = null;
+
+  constructor(private userService: UserService) {
+    this.loadAddresses();
+  }
+
+  loadAddresses() {
+    this.userService.getAddresses().subscribe({
+      next: (data) => this.savedAddresses = data,
+      error: (err) => console.error('Error fetching addresses', err)
+    });
+  }
 
   async onCepInput(event: any) {
     let value = event.target.value.replace(/\D/g, '');
@@ -72,12 +85,70 @@ export class Addresses {
 
   onSubmit() {
     if (this.addressForm.valid) {
-      console.log('Address Added', this.addressForm.value);
-      // Logic to add to savedAddresses
+      if (this.isEditing && this.editingAddressId) {
+        this.userService.deleteAddress(this.editingAddressId).subscribe({
+          next: () => {
+            this.addAddress(true);
+          },
+          error: (err) => alert('Erro ao atualizar endereço.')
+        });
+      } else {
+        this.addAddress();
+      }
     }
+  }
+
+  addAddress(isUpdate = false) {
+    this.userService.addAddress(this.addressForm.value).subscribe({
+      next: (data) => {
+        this.loadAddresses();
+        this.addressForm.reset();
+        this.addressForm.get('type')?.setValue('home'); // Reset default
+        this.isEditing = false;
+        this.editingAddressId = null;
+        alert(isUpdate ? 'Endereço atualizado com sucesso!' : 'Endereço salvo com sucesso!');
+      },
+      error: (err) => alert('Erro ao salvar endereço.')
+    });
   }
 
   selectAddress(index: number) {
     this.savedAddresses.forEach((addr, i) => addr.selected = i === index);
+  }
+
+  startEdit(address: any) {
+    this.isEditing = true;
+    this.editingAddressId = address.id;
+    this.addressForm.patchValue(address);
+  }
+
+  confirmDelete(id: number) {
+    this.addressToDeleteId = id;
+    this.showDeleteConfirmation = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirmation = false;
+    this.addressToDeleteId = null;
+  }
+
+  deleteAddress() {
+    if (this.addressToDeleteId) {
+      this.userService.deleteAddress(this.addressToDeleteId).subscribe({
+        next: () => {
+          this.loadAddresses();
+          this.showDeleteConfirmation = false;
+          this.addressToDeleteId = null;
+        },
+        error: (err) => alert('Erro ao excluir endereço.')
+      });
+    }
+  }
+
+  cancelEdit() {
+    this.isEditing = false;
+    this.editingAddressId = null;
+    this.addressForm.reset();
+    this.addressForm.get('type')?.setValue('home');
   }
 }

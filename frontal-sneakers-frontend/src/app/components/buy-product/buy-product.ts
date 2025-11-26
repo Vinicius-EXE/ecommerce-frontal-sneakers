@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,10 +8,21 @@ import { CommonModule } from '@angular/common';
   templateUrl: './buy-product.html',
   styleUrl: './buy-product.css',
 })
-export class BuyProduct {
-  sizes: number[] = [35, 36, 37, 38, 39, 40, 41, 42, 43];
+export class BuyProduct implements OnChanges {
+  @Input() product: any;
+  sizes: number[] = [];
   selectedSize: number | null = null;
   quantity: number = 1;
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['product'] && this.product) {
+      if (this.product.sizes) {
+        this.sizes = this.product.sizes.split(',').map((s: string) => parseInt(s.trim()));
+      } else {
+        this.sizes = [];
+      }
+    }
+  }
 
   selectSize(size: number) {
     this.selectedSize = size;

@@ -1,11 +1,10 @@
-<div class="buy-product-card">
+<div class="buy-product-card" *ngIf="product">
     <div class="text-content">
-        <h1 class="product-title">Tênis ASICS GEL-NYC</h1>
+        <h1 class="product-title">Tênis {{ product.brand }} {{ product.name }}</h1>
 
         <div class="price-container">
-            <span class="old-price">R$ 899,99</span>
-            <span class="current-price">R$ 719,99</span>
-            <p class="installments">ou ate 10x de <strong>R$ 71,99</strong></p>
+            <span class="current-price">{{ product.price | currency:'BRL' }}</span>
+            <p class="installments">ou ate 10x de <strong>{{ (product.price / 10) | currency:'BRL' }}</strong></p>
         </div>
     </div>
 

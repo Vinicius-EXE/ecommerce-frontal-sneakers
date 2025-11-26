@@ -23,7 +23,7 @@
 
 h2,
 h3 {
-    color: #fff;
+    color: #333;
     margin: 0;
 }
 
@@ -46,18 +46,14 @@ h3 {
     align-items: center;
     padding: 16px;
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 2.5px solid #333;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.card-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
 .card-item.selected {
-    border-color: #fff;
+    border-color: #333;
     background: rgba(255, 255, 255, 0.15);
 }
 
@@ -70,13 +66,18 @@ h3 {
 .card-nickname {
     font-weight: bold;
     font-size: 16px;
-    color: #fff;
+    color: #AAA;
 }
 
 .card-holder,
 .card-number {
     font-size: 14px;
     color: #ccc;
+}
+
+.card-actions {
+    display: flex;
+    gap: 8px;
 }
 
 /* Form Styles */
@@ -100,6 +101,12 @@ h3 {
     gap: 20px;
 }
 
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+}
+
 label {
     color: #888;
     font-size: 14px;
@@ -110,7 +117,7 @@ label {
 input,
 textarea {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid #CCC;
+    border: 1px solid #333;
     border-radius: 12px;
     padding: 16px;
     color: #111;
@@ -197,7 +204,9 @@ textarea::placeholder {
     gap: 8px;
 }
 
-.save-btn {
+.save-btn,
+.cancel-btn,
+.confirm-btn {
     margin-top: 10px;
     display: flex;
     align-items: center;
@@ -216,16 +225,44 @@ textarea::placeholder {
     align-self: flex-end;
 }
 
-.save-btn:hover:not(:disabled) {
+.save-btn:hover:not(:disabled),
+.cancel-btn:hover:not(:disabled),
+.confirm-btn:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
     background: #333;
     color: #fff;
 }
 
-.save-btn:disabled {
+.save-btn:disabled,
+.cancel-btn:disabled,
+.confirm-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
     background: #ccc;
     border-color: #ccc;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 20%;
+    background: #fff;
+    color: #000;
+    border: 2.5px solid #333;
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
 }

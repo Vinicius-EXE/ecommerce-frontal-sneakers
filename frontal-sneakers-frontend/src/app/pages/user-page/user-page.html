@@ -1,14 +1,16 @@
-<app-sidebar (toggle)="onSidebarToggle($event)"></app-sidebar>
 <div class="user-page-container" [class.collapsed]="isSidebarCollapsed">
+    <app-sidebar (toggle)="onSidebarToggle($event)"></app-sidebar>
+
     <div class="user-info">
         <div class="header-user-info">
-            <figure class="user-image">
-                <img src="/assets/default-profile-pic.png" alt="Imagem padrão de usuário">
-            </figure>
-            <h2 class="user-name">Arthur Soares Pereira</h2>
-            <p class="user-email">arthursp@email.com</p>
+            <div class="user-image">
+                <img src="assets/default-profile-pic.png" alt="User Profile Picture">
+            </div>
+            <h2 class="user-name">{{ user.name }}</h2>
+            <p class="user-email">{{ user.email }}</p>
         </div>
-        <a href="/home"><button class="go-to-home-btn"><i class="fa-solid fa-arrow-left"></i>Voltar para Home</button></a>
+        <a href="/home"><button class="go-to-home-btn"><i class="fa-solid fa-arrow-left"></i>Voltar para
+                Home</button></a>
     </div>
     <div class="user-page-content">
         <router-outlet></router-outlet>

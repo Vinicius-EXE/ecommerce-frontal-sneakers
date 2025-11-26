@@ -26,7 +26,6 @@
               "src/styles.css"
             ],
             "server": "src/main.server.ts",
-            "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
             }
@@ -81,9 +80,9 @@
               }
             ],
             "styles": [
-  "src/styles.css",
-  "node_modules/@coreui/coreui/dist/css/coreui.min.css"
-]
+              "src/styles.css",
+              "node_modules/@coreui/coreui/dist/css/coreui.min.css"
+            ]
           }
         }
       }

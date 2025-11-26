@@ -9,12 +9,16 @@
                 <span class="card-holder">{{ addr.street }}, {{ addr.number }} - {{ addr.neighborhood }}</span>
                 <span class="card-number">{{ addr.cep }}</span>
             </div>
-            <input type="radio" [checked]="addr.selected" name="selectedAddress">
+            <div class="card-actions">
+                <i class="fa-solid fa-pencil" (click)="startEdit(addr); $event.stopPropagation()"></i>
+                <i class="fa-solid fa-trash" (click)="confirmDelete(addr.id); $event.stopPropagation()"></i>
+                <input type="radio" [checked]="addr.selected" name="selectedAddress">
+            </div>
         </div>
     </div>
 
     <form [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="address-form">
-        <h3>Adicionar Novo Endereço</h3>
+        <h3>{{ isEditing ? 'Editar Endereço' : 'Adicionar Novo Endereço' }}</h3>
 
         <div class="form-group">
             <label for="cep">CEP</label>
@@ -92,6 +96,21 @@
             <input type="text" id="nickname" formControlName="nickname" placeholder="Ex.: Minha Casa">
         </div>
 
-        <button type="submit" class="save-btn" [disabled]="!addressForm.valid">Adicionar Endereço</button>
+        <div class="form-actions">
+            <button type="button" class="cancel-btn" *ngIf="isEditing" (click)="cancelEdit()">Cancelar</button>
+            <button type="submit" class="save-btn" [disabled]="!addressForm.valid">{{ isEditing ? 'Salvar Alterações' :
+                'Adicionar Endereço' }}</button>
+        </div>
     </form>
+
+    <div class="modal-overlay" *ngIf="showDeleteConfirmation">
+        <div class="modal-content">
+            <h3>Confirmar Exclusão</h3>
+            <p>Tem certeza que deseja excluir este endereço?</p>
+            <div class="modal-actions">
+                <button class="cancel-btn" (click)="cancelDelete()">CANCELAR</button>
+                <button class="confirm-btn" (click)="deleteAddress()">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
 </main>

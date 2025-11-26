@@ -1,0 +1,56 @@
+<main class="main-container">
+    <h2>Gerenciar Pedidos</h2>
+
+    <div class="cards-list">
+        <div *ngFor="let order of orders" class="card-item">
+            <div class="card-info">
+                <span class="card-nickname">Pedido #{{ order.id }} - {{ order.customer }}</span>
+                <span class="card-holder">Data: {{ order.date }} | Total: R$ {{ order.total | number:'1.2-2' }}</span>
+                <span class="card-number" [ngClass]="{
+                    'status-pending': order.status === 'PAGAMENTO EM ANDAMENTO',
+                    'status-approved': order.status === 'PAGAMENTO APROVADO',
+                    'status-shipped': order.status === 'ENVIADO',
+                    'status-delivered': order.status === 'ENTREGUE',
+                    'status-cancelled': order.status === 'CANCELADO'
+                }">{{ order.status }}</span>
+            </div>
+            <div class="card-actions">
+                <button class="details-btn" (click)="viewDetails(order)">Ver Detalhes</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" *ngIf="showDetailsPopup">
+        <div class="modal-content large-modal">
+            <h3>Detalhes do Pedido #{{ selectedOrder?.id }}</h3>
+
+            <div class="order-details">
+                <p><strong>Cliente:</strong> {{ selectedOrder?.customer }}</p>
+                <p><strong>Data:</strong> {{ selectedOrder?.date }}</p>
+                <p><strong>Endereço de Entrega:</strong> {{ selectedOrder?.address }}</p>
+
+                <h4>Itens:</h4>
+                <ul class="items-list">
+                    <li *ngFor="let item of selectedOrder?.items">
+                        {{ item.quantity }}x {{ item.name }} (Tam: {{ item.size }}) - R$ {{ item.price | number:'1.2-2'
+                        }}
+                    </li>
+                </ul>
+
+                <p class="total"><strong>Total:</strong> R$ {{ selectedOrder?.total | number:'1.2-2' }}</p>
+
+                <div class="form-group">
+                    <label for="status">Situação do Pedido:</label>
+                    <select id="status" [(ngModel)]="selectedOrder.status" class="status-select">
+                        <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="cancel-btn" (click)="closeDetails()">FECHAR</button>
+                <button class="confirm-btn" (click)="saveOrder()">SALVAR ALTERAÇÕES</button>
+            </div>
+        </div>
+    </div>
+</main>

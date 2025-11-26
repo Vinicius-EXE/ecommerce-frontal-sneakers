@@ -1,0 +1,76 @@
+<main class="main-container">
+    <h2>Gerenciar Produtos</h2>
+
+    <div class="cards-list">
+        <div *ngFor="let product of products" class="card-item">
+            <div class="card-info">
+                <span class="card-nickname">{{ product.name }}</span>
+                <span class="card-holder">{{ product.brand }} - R$ {{ product.price }}</span>
+                <span class="card-number">Tamanhos: {{ product.sizes }} | Qtd: {{ product.quantity }}</span>
+            </div>
+            <div class="card-actions">
+                <i class="fa-solid fa-pencil" (click)="startEdit(product)"></i>
+                <i class="fa-solid fa-trash" (click)="confirmDelete(product.id)"></i>
+            </div>
+        </div>
+    </div>
+
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form">
+        <h3>{{ isEditing ? 'Editar Produto' : 'Adicionar Novo Produto' }}</h3>
+
+        <div class="form-group">
+            <label for="name">Nome do Tênis</label>
+            <input type="text" id="name" formControlName="name" placeholder="Ex.: Nike Air Max">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="price">Valor (R$)</label>
+                <input type="number" id="price" formControlName="price" placeholder="Ex.: 599.90">
+            </div>
+            <div class="form-group">
+                <label for="brand">Marca</label>
+                <input type="text" id="brand" formControlName="brand" placeholder="Ex.: Nike">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="sizes">Tamanhos Disponíveis</label>
+                <input type="text" id="sizes" formControlName="sizes" placeholder="Ex.: 38, 39, 40">
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantidade por Tamanho</label>
+                <input type="text" id="quantity" formControlName="quantity" placeholder="Ex.: 10">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Descrição do Produto</label>
+            <textarea id="description" formControlName="description" rows="3"
+                placeholder="Descrição detalhada..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="images">Imagens (URLs separadas por vírgula)</label>
+            <input type="text" id="images" formControlName="images" placeholder="http://..., http://...">
+        </div>
+
+        <div class="form-actions">
+            <button type="button" class="cancel-btn" *ngIf="isEditing" (click)="cancelEdit()">Cancelar</button>
+            <button type="submit" class="save-btn" [disabled]="!productForm.valid">{{ isEditing ? 'Salvar Alterações' :
+                'Adicionar Produto' }}</button>
+        </div>
+    </form>
+
+    <div class="modal-overlay" *ngIf="showDeleteConfirmation">
+        <div class="modal-content">
+            <h3>Confirmar Exclusão</h3>
+            <p>Tem certeza que deseja excluir este produto?</p>
+            <div class="modal-actions">
+                <button class="cancel-btn" (click)="cancelDelete()">CANCELAR</button>
+                <button class="confirm-btn" (click)="deleteProduct()">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+</main>
